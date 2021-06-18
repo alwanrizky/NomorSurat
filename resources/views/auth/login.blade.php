@@ -1,7 +1,14 @@
+@extends('layouts.header')
+
+@section('title','Nomor Surat Teknik Informatika')
+
+@section('container')
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <!-- hide logo bawaan -->
+            <!-- <x-jet-authentication-card-logo />  -->
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -46,3 +53,4 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+@endsection
