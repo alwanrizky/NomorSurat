@@ -54,7 +54,7 @@
                     </a>
                 </td>
                 <td style="width: 50%"> 
-                    <h2 class="text-head">Nomor Surat Teknik Informatika</h2>
+                    <h1 class="text-head">Nomor Surat FTIS</h1>
                     <h2 class="text-head">Universitas Katolik Parahyangan </h2>
                 </td>
             </tr>
