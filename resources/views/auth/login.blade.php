@@ -10,7 +10,7 @@
 <body>
     <form method="POST" action="{{ route('login') }}">
     @csrf
-        <div class="container mx-auto">
+        <div class="container">
             <x-jet-validation-errors class="mb-4" />
 
             @if (session('status'))
