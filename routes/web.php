@@ -21,6 +21,10 @@ Route::get('/header',function(){
     return view('layouts/header');
 });
 
+Route::get('/result',function(){
+    return view('generate-result');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
