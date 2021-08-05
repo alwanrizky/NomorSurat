@@ -28,3 +28,11 @@ Route::get('/result',function(){
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/create-surat',function(){
+    return view('create-surat');
+});
+
+Route::get('/menu',function(){
+    return view('menu');
+});
