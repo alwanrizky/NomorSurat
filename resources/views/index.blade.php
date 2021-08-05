@@ -15,17 +15,42 @@
             <td>
                 <h1>Fakultas Teknologi <br>
                 Informasi & Sains </h1>
+                <h5>NOSURAT</h5>
             </td>
             <td class="vl">
             </td>
-            <td>
-                <h2>
-                    Nomor Surat <br>
-                    <br>
-                    <button class="btn btn-primary" onclick="window.location='/login'">
-                        Login
-                    </button>
-                </h2>
+            <td class="container">
+                <form method="POST" action="{{ route('login') }}">
+                @csrf
+                    <div>
+                        <x-jet-validation-errors class="mb-4" />
+
+                        @if (session('status'))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <x-jet-input id="email" class="block mt-1 w-full form__input" type="email" name="email" :value="old('email')" placeholder="Email" required autofocus />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <x-jet-input id="password" class="block mt-1 w-full form__input" type="password" name="password" required autocomplete="current-password" placeholder="Password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <x-jet-button class="btn btn-primary btn-sm">
+                                        {{ __('LOGIN') }}
+                                    </x-jet-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
             </td>
         </table>
     </div>
