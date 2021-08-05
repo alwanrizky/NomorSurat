@@ -1,0 +1,19 @@
+.container{
+    margin-top: 20px;
+}
+#row1{
+    text-align:center;
+    border: 1px solid black;
+    width: 45%;
+}
+#row2{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+table{
+    width: 100%;
+}

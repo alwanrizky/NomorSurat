@@ -36,3 +36,7 @@ Route::get('/create-surat',function(){
 Route::get('/menu',function(){
     return view('menu');
 });
+
+Route::get('/history',function(){
+    return view('history');
+});
