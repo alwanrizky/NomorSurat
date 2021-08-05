@@ -59,4 +59,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function nomorSurat(){
+        return $this->hasMany(nomorSurat::class,'id_user','id');
+    }
 }

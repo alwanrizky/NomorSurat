@@ -20,4 +20,8 @@ class NomorSurat extends Model
         'perihal',
         'id_user',
     ];
+
+    public function user(){
+        return $this->belongTo(User::class, 'id','id_user');
+    }
 }
