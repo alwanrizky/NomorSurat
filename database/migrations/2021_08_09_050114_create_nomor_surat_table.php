@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NomorSurat extends Migration
+class CreateNomorSuratTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,7 @@ class NomorSurat extends Migration
             $table->string('kepada');
             $table->string('perihal');
             $table->foreignId('id_user')->constrained('users');
+            $table->foreignId('id_tipe_surat')->constrained('tipe_surat');
             $table->timestamps();
         });
     }
