@@ -12,41 +12,58 @@
                 <tr>
                     <td>
                         <label for="perihal">Perihal&nbsp;&nbsp;&emsp;&emsp;:&emsp;</label>
-                        <input type="text" id="perihal" name="perihal" placeholder="Perihal" form="form"> <br>    
+                        <input type="text" id="perihal" name="perihal" placeholder="Perihal" required> <br>    
                     </td>
                 </tr>
 
                 <tr>
                     <td>
                         <label for="perihal">Kepada&emsp;&nbsp;&emsp;:&emsp;</label>
-                        <input type="text" id="kepada" name="kepada" placeholder="Kepada" form="form"><br>
+                        <input type="text" id="kepada" name="kepada" placeholder="Kepada" required><br>
                     </td>
                 </tr>
 
                 <tr>
                     <td>
                         <label for="tipersurat">Tipe Surat&emsp;:&emsp;</label>
-                        <select id="tipesurat" name="tipesurat" form="form">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                        <select id="tipesurat" name="tipesurat" required>
+                            <?php
+                                // echo $tipeSurat;
+                                foreach($tipeSurat as $tipe){
+                                    echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
+                                }
+                                
+                            ?>
                         </select><br>
                     </td>
                 </tr>
-
                 <tr>
                     <td>
                         <label for="perihal">Multiply&emsp;&emsp;:&emsp;</label>
-                        <input type="number" id="multiply" name="multiply" step="1" form="form"> <a href="#"><i class="fa fa-solid fa-check"></i></a><br><br>
+                        <input type="number" id="multiply" name="multiply" value="1" disabled> <input name="checkboxMultiply" type="checkbox" style="width: 30px; height: 30px;" onclick="enableMultiplication()"><br><br>
                     </td>
                 </tr>
 
             </table>
 
-            <input type="submit" id="submit" value="Create" form="form">
+            <input type="submit" id="submit" value="Create">
             
         </form>
     </div>
 </div>
 </x-app-layout>
+
+<script>
+    function enableMultiplication()
+		{
+			if(document.getElementsByName("checkboxMultiply")[0].checked == true)
+			{
+				document.getElementsByName("multiply")[0].disabled = false;
+			}
+			else
+			{
+				document.getElementsByName("multiply")[0].disabled = true;
+				document.getElementsByName("multiply")[0].value = 1;
+			}
+		}
+</script>
