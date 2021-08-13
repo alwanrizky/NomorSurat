@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\NomorSuratController;
 
 Route::get('/', function () {
     return view('index');
@@ -29,9 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/create-surat',function(){
-    return view('create-surat');
-});
+Route::get('/create-surat',[NomorSuratController::class, 'index']);
 
 Route::get('/menu',function(){
     return view('menu');
