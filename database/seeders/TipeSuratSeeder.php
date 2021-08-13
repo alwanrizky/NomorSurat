@@ -21,7 +21,7 @@ class TipeSuratSeeder extends Seeder
     public function run()
     {
         for($i = 0; $i < sizeof($this->tipeSurat); $i++){
-            DB::table('tipe_surat')->insert([
+            DB::table('tipe_surats')->insert([
                 'tipe_surat' => $this->tipeSurat[$i],
                 'alias' => $this->alias[$i]
             ]);
