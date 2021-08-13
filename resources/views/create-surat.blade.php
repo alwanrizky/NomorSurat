@@ -6,7 +6,8 @@
 <x-app-layout>
 <div class="container">
     <div class="content">
-        <form method="get" id="form" action=/create-surat>
+        <form method="post" id="form" action="/result-surat">
+            @csrf
             <br>
             <table>
                 <tr>
@@ -26,9 +27,8 @@
                 <tr>
                     <td>
                         <label for="tipersurat">Tipe Surat&emsp;:&emsp;</label>
-                        <select id="tipesurat" name="tipesurat" required>
+                        <select id="tipesurat" name="tipeSurat" required>
                             <?php
-                                // echo $tipeSurat;
                                 foreach($tipeSurat as $tipe){
                                     echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
                                 }
