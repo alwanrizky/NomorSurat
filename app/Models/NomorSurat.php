@@ -19,13 +19,16 @@ class NomorSurat extends Model
         'kepada',
         'perihal',
         'id_user',
-        'id_tipe_surat'
+        'id_tipe_surat',
+        'create_at'
     ];
 
+    // id table ini, id table FK
     public function user(){
         return $this->belongTo(User::class, 'id','id_user');
     }
 
+    // id table ini, id table FK
     public function tipeSurat(){
         return $this->belongTo(User::class, 'id','id_tipe_surat');
     }
