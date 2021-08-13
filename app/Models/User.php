@@ -60,6 +60,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    // id table FK, id table ini
     public function nomorSurat(){
         return $this->hasMany(nomorSurat::class,'id_user','id');
     }
