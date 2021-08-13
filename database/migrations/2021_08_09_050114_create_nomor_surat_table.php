@@ -13,13 +13,13 @@ class CreateNomorSuratTable extends Migration
      */
     public function up()
     {
-        Schema::create('nomor_surat', function (Blueprint $table) {
+        Schema::create('nomor_surats', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_surat');
             $table->string('kepada');
             $table->string('perihal');
             $table->foreignId('id_user')->constrained('users');
-            $table->foreignId('id_tipe_surat')->constrained('tipe_surat');
+            $table->foreignId('id_tipe_surat')->constrained('tipe_surats');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateNomorSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nomor_surat');
+        Schema::dropIfExists('nomor_surats');
     }
 }

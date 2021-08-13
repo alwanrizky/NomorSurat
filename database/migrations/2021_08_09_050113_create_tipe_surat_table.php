@@ -13,7 +13,7 @@ class CreateTipeSuratTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipe_surat', function (Blueprint $table) {
+        Schema::create('tipe_surats', function (Blueprint $table) {
             $table->id();
             $table->string('tipe_surat');
             $table->string('alias');
@@ -28,6 +28,6 @@ class CreateTipeSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipe_surat');
+        Schema::dropIfExists('tipe_surats');
     }
 }
