@@ -27,7 +27,7 @@
                 <tr>
                     <td>
                         <label for="tipersurat">Tipe Surat&emsp;:&emsp;</label>
-                        <select id="tipesurat" name="tipeSurat" required>
+                        <select id="tipesurat" name="aliasTipeSurat" required>
                             <?php
                                 foreach($tipeSurat as $tipe){
                                     echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
