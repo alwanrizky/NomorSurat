@@ -6,7 +6,7 @@
 <x-app-layout>
 <div class="container">
     <div class="content">
-        <form method="post" id="form" action="/result-surat">
+        <form method="post" id="form" action="/generate">
             @csrf
             <br>
             <table>
@@ -46,7 +46,7 @@
 
             </table>
 
-            <input type="submit" id="submit" value="Create">
+            <input type="submit" id="submit" name="create" value="Create">
             
         </form>
     </div>
