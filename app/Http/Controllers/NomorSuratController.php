@@ -15,6 +15,8 @@ class NomorSuratController extends Controller
     private TipeSuratController $tipeSuratController;
     private DateController $dateController;
 
+    private $result;
+
     public function __construct(){
         $this->tipeSuratController = new TipeSuratController();
         $this->dateController = new DateController();
@@ -25,6 +27,7 @@ class NomorSuratController extends Controller
     }
 
     public function generateSurat(Request $request){
+        
         $currentDate = $this->dateController->getCurrentDate();
         $year = $this->dateController->getYear();
         $month = $this->dateController->getMonth();
@@ -52,7 +55,7 @@ class NomorSuratController extends Controller
             $multiply=1;
         }
 
-        $result = [];
+        $this->result = [];
 
         for($i = 1; $i<= $multiply; $i++){
             $firstMeasure = $this->firstMeasure($banyakData, $i);
@@ -65,12 +68,12 @@ class NomorSuratController extends Controller
                 'id_tipe_surat' => $idTipeSurat[0]['id'],
                 'created_at' => $currentDate,
             ];
-            array_push($result, $data);
+            array_push($this->result, $data);
         }
-        
-        NomorSurat::insert($result);
 
-        return view('result-surat', ['result'=>$result]);
+        NomorSurat::insert($this->result);
+
+        return redirect()->route('result-surat')->with(['result'=>$this->result]);
     }
 
     private function countSurat($year){
