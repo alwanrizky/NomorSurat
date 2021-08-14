@@ -5,27 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\TipeSuratController;
-
-use Carbon\Carbon;
+use App\Http\Controllers\DateController;
 
 use App\Models\NomorSurat;
+use Illuminate\Support\Facades\Auth;
 
 class NomorSuratController extends Controller
 {
-    private TipeSuratController $tipeSurat;
+    private TipeSuratController $tipeSuratController;
+    private DateController $dateController;
 
     public function __construct(){
-        $this->tipeSurat = new TipeSuratController();
+        $this->tipeSuratController = new TipeSuratController();
+        $this->dateController = new DateController();
     }
 
     public function index(){
-        return view('create-surat', ['tipeSurat' => $this->tipeSurat->getTipeSurat()]);
+        return view('create-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
     public function generateSurat(Request $request){
-        $date = Carbon::now();
-        $year = $date->year;
-        $month = $date->month;
+        $currentDate = $this->dateController->getCurrentDate();
+        $year = $this->dateController->getYear();
+        $month = $this->dateController->getMonth();
 
         // hitung banyaknya data di db nomorsurat
         $banyakData = $this->countSurat($year);
@@ -37,15 +39,14 @@ class NomorSuratController extends Controller
             $measureZero .= "0";
             $divisor = $divisor/10;
         }
-
-        //firstmeasure
-        
         
         $data = $request;
 
         $perihal = $request['perihal'];
         $kepada = $request['kepada'];
-        $tipe = $request['tipeSurat'];
+        $aliasTipeSurat = $request['aliasTipeSurat'];
+        $idTipeSurat = $this->tipeSuratController->getId($aliasTipeSurat);
+
         $multiply = $request['multiply'];
         if($multiply==null){
             $multiply=1;
@@ -55,15 +56,25 @@ class NomorSuratController extends Controller
 
         for($i = 1; $i<= $multiply; $i++){
             $firstMeasure = $this->firstMeasure($banyakData, $i);
-            $temp = "III/FTIS/".$year."-".$month."/".$measureZero."".($banyakData+$i)."-".$tipe."";
-            array_push($result, $temp);
+            $nosur = "III/FTIS/".$year."-".$month."/".$measureZero."".($banyakData+$i)."-".$aliasTipeSurat."";
+            $data = [
+                'nomor_surat' => $nosur,
+                'kepada' => $kepada,
+                'perihal' => $perihal,
+                'id_user' => Auth::id(),
+                'id_tipe_surat' => $idTipeSurat[0]['id'],
+                'created_at' => $currentDate,
+            ];
+            array_push($result, $data);
         }
+        
+        NomorSurat::insert($result);
 
         return view('result-surat', ['result'=>$result]);
     }
 
     private function countSurat($year){
-        $query = NomorSurat::where('created_at','=', $year);
+        $query = NomorSurat::where('created_at','Like', '%'.$year.'%');
         return $query->count();
     }
 
