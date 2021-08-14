@@ -7,22 +7,35 @@
 
 <x-app-layout>
     <div class="container"  align='center' style="width:800px; margin:0 auto; background: #d6d6d6; border-radius: 10px; margin: 150px auto">
-        <div style="width: 80%; padding-top:4%; padding-bottom: 4%; border-radius: 10px; margin-bottom: 20px;">
-            <h2>Nomor surat Anda adalah : </h2>
             <?php
                 $count=1;
-                foreach($result as $res){
-                    echo '<input type="text" name="nomor-surat'.$count.'" id="nomor-surat'.$count.'"';
-                    echo 'value="'.$res['nomor_surat'].'"';
-                    echo 'style="text-align: center; width: 60%; margin-right: 10px;" readonly="readonly">';  
-                    echo '<button class="btn btn-light" onclick="copyNoSurat('.$count.')"><i class="fa fa-copy"></i></button>';
-                    $count++;
-                    echo '<br>';
-                    echo '<br>';
+                $result = Session::get('result');
+                if($result!=null){
+                    echo '<div style="width: 80%; padding-top:4%; padding-bottom: 4%; border-radius: 10px; margin-bottom: 20px;">';
+                    echo '<h2>Nomor surat Anda adalah : </h2>';
+                    foreach($result as $res){
+                        echo '<input type="text" name="nomor-surat'.$count.'" id="nomor-surat'.$count.'"';
+                        echo 'value="'.$res['nomor_surat'].'"';
+                        echo 'style="text-align: center; width: 60%; margin-right: 10px;" readonly="readonly">';  
+                        echo '<button class="btn btn-light" onclick="copyNoSurat('.$count.')"><i class="fa fa-copy"></i></button>';
+                        $count++;
+                        echo '<br>';
+                        echo '<br>';
+                    }
+                    echo '</div>';
+                }else{
+                    echo "<h3>Maaf anda tidak bisa melakukan refresh, silakan klik link dibawah untuk kembali ke halaman sebelumnya</h3>";
+                    echo "<br>";
+                    echo "<a href='/create-surat'>Kembali ke Create Nomor Surat</a>";
+                    // URL::previous();
+                    // Session::set('backUrl', URL::previous());
+                    // redirect()->getUrlGenerator()->previous();
+
                 }
+                
             ?>
             
-        </div>
+        
     </div>
 </x-app-layout>
 
