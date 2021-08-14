@@ -12,7 +12,7 @@
 <div class="container">
     <div class="block" style="font-size=24px">
         <a href="create-surat"><i class="fa fa-plus-circle fa-5x"></i></a><br>
-        <b>Create NoSurat</b>
+        <b>Create Nomor Surat</b>
     </div>
     <div class="block" style="font-size=24px">
         <a href="#"><i class="fa fa-envelope fa-5x"></i></a><br>
