@@ -13,7 +13,7 @@
                 $count=1;
                 foreach($result as $res){
                     echo '<input type="text" name="nomor-surat'.$count.'" id="nomor-surat'.$count.'"';
-                    echo 'value="'.$res.'"';
+                    echo 'value="'.$res['nomor_surat'].'"';
                     echo 'style="text-align: center; width: 60%; margin-right: 10px;" readonly="readonly">';  
                     echo '<button class="btn btn-light" onclick="copyNoSurat('.$count.')"><i class="fa fa-copy"></i></button>';
                     $count++;
