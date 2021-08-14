@@ -18,17 +18,17 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/header',function(){
-    return view('layouts/header');
-});
+Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
 
-Route::post('/result-surat', [NomorSuratController::class, 'generateSurat']);
+Route::get('/result-surat',function(){
+    return view('result-surat');
+})->name('result-surat');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/create-surat',[NomorSuratController::class, 'index']);
+Route::get('/create-surat',[NomorSuratController::class, 'index'])->name('create-surat');
 
 Route::get('/menu',function(){
     return view('menu');
