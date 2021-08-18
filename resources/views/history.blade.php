@@ -36,13 +36,20 @@
                 <th>Perihal</th>
                 <th>Kepada</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Tanggal</td>
-                <td>Nomor Surat</td>
-                <td>Perihal</td>
-                <td>Kepada</td>
-            </tr>
+            <?php 
+                $i = 1;
+                foreach($history as $h){
+                    echo "<tr>";
+                        echo "<td>".$i."</td>";
+                        echo "<td>".substr($h['created_at'], 0, 10)."</td>";
+                        echo "<td>".$h['nomor_surat']."</td>";
+                        echo "<td>".$h['perihal']."</td>";
+                        echo "<td>".$h['kepada']."</td>";
+                    echo "</tr>";
+                    $i++;
+                }
+                
+            ?>
         </table>
     </div>
     

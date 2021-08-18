@@ -77,12 +77,17 @@ class NomorSuratController extends Controller
         return redirect()->route('result-surat')->with(['result'=>$this->result]);
     }
 
-    public function check(Request $request){
+    public function check(){
         if(Session::get('result')!=null){
             return view('result-surat');
         }else{
             return redirect()->route('create-surat');
         }
+    }
+
+    public function getHistory(){
+        $history = NomorSurat::all()->where('id_user','=', Auth::id());
+        return view('history', ['history'=>$history]);
     }
 
     private function countSurat($year){
