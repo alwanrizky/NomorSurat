@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\NomorSuratController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
@@ -20,9 +21,11 @@ Route::get('/', function () {
 
 Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
 
-Route::get('/result-surat',function(){
-    return view('result-surat');
-})->name('result-surat');
+Route::get('/result-surat',[NomorSuratController::class, 'check'])->name('result-surat');
+
+// Route::get('/result-surat',function(Request $request){
+//     return view('result-surat');    
+// })->name('result-surat');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

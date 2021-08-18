@@ -9,6 +9,7 @@ use App\Http\Controllers\DateController;
 
 use App\Models\NomorSurat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class NomorSuratController extends Controller
 {
@@ -74,6 +75,14 @@ class NomorSuratController extends Controller
         NomorSurat::insert($this->result);
 
         return redirect()->route('result-surat')->with(['result'=>$this->result]);
+    }
+
+    public function check(Request $request){
+        if(Session::get('result')!=null){
+            return view('result-surat');
+        }else{
+            return redirect()->route('create-surat');
+        }
     }
 
     private function countSurat($year){
