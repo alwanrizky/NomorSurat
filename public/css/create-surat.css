@@ -1,25 +1,12 @@
-body{
-    background: #91e4fb;
-}
 .container {
     border-radius: 25px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 70%;
-    background: #00c8f8;
+    background: #d6d6d6;
     margin: 200px auto;
     position: relative;
     text-align:center;
-}
-.content{
-    font-size: 30px;
-    border-radius: 25px;
-    background: #91e4fb;
-    height: 380px;
-    width: 80%;
-    margin: 40px;
-    vertical-align: middle;
 }
 
 #submit{

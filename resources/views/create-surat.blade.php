@@ -4,8 +4,7 @@
 <link rel="stylesheet" href="{{URL::asset('css/create-surat.css')}}"> 
 
 <x-app-layout>
-<div class="container">
-    <div class="content">
+<div class="container" style="width: 60%;">
         <form method="post" id="form" action="/generate">
             @csrf
             <br>
@@ -49,7 +48,6 @@
             <input type="submit" id="submit" name="create" value="Create">
             
         </form>
-    </div>
 </div>
 </x-app-layout>
 

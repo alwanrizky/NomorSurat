@@ -1,13 +1,10 @@
-body{
-    background: #91e4fb;
-}
 .container {
     border-radius: 25px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 70%;
-    background: #00c8f8;
+    background: #d6d6d6;
     margin: 300px auto;
     position: relative;
     text-align:center;
@@ -15,7 +12,7 @@ body{
 
 .block {    
     border-radius: 25px;
-    background: #91e4fb;
+    background: white;
     height: 200px;
     width: 200px;
     margin: 65px;
