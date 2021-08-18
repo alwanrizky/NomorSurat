@@ -10,6 +10,7 @@ use App\Http\Controllers\DateController;
 use App\Models\NomorSurat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class NomorSuratController extends Controller
 {
@@ -86,7 +87,7 @@ class NomorSuratController extends Controller
     }
 
     public function getHistory(){
-        $history = NomorSurat::all()->where('id_user','=', Auth::id());
+        $history = NomorSurat::where('id_user','=', Auth::id())->paginate(20);
         return view('history', ['history'=>$history]);
     }
 

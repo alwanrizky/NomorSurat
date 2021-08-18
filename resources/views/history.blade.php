@@ -37,7 +37,7 @@
                 <th>Kepada</th>
             </tr>
             <?php 
-                $i = 1;
+                $i = (($history->currentPage()-1)*20)+1;
                 foreach($history as $h){
                     echo "<tr>";
                         echo "<td>".$i."</td>";
@@ -48,9 +48,12 @@
                     echo "</tr>";
                     $i++;
                 }
+
                 
             ?>
         </table>
+        <br>
+        {{ $history->links() }}
     </div>
     
     
