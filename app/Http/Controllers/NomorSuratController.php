@@ -5,23 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\TipeSuratController;
-use App\Http\Controllers\DateController;
 
 use App\Models\NomorSurat;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\DB;
 
 class NomorSuratController extends Controller
 {
     private TipeSuratController $tipeSuratController;
-    private DateController $dateController;
-
-    private $result;
-
+    private Carbon $date;
+    
     public function __construct(){
         $this->tipeSuratController = new TipeSuratController();
-        $this->dateController = new DateController();
+        $this->date = Carbon::now('utc');
     }
 
     public function index(){
@@ -29,23 +26,8 @@ class NomorSuratController extends Controller
     }
 
     public function generateSurat(Request $request){
-        
-        $currentDate = $this->dateController->getCurrentDate();
-        $year = $this->dateController->getYear();
-        $month = $this->dateController->getMonth();
-
         // hitung banyaknya data di db nomorsurat
-        $banyakData = $this->countSurat($year);
-
-        $divisor = 1000;
-        $measureZero="";
-        while(($banyakData+1)/$divisor < 1 )
-        {
-            $measureZero .= "0";
-            $divisor = $divisor/10;
-        }
-        
-        $data = $request;
+        $banyakData = $this->countSurat($this->date->year);
 
         $perihal = $request['perihal'];
         $kepada = $request['kepada'];
@@ -53,29 +35,27 @@ class NomorSuratController extends Controller
         $idTipeSurat = $this->tipeSuratController->getId($aliasTipeSurat);
 
         $multiply = $request['multiply'];
-        if($multiply==null){
-            $multiply=1;
-        }
+        if($multiply==null) $multiply=1;
 
-        $this->result = [];
+        $result = [];
 
         for($i = 1; $i<= $multiply; $i++){
             $firstMeasure = $this->firstMeasure($banyakData, $i);
-            $nosur = "III/FTIS/".$year."-".$month."/".$measureZero."".($banyakData+$i)."-".$aliasTipeSurat."";
+            $nosur = "III/FTIS/".$this->date->year."-".$this->date->month."/".$firstMeasure."".($banyakData+$i)."-".$aliasTipeSurat."";
             $data = [
                 'nomor_surat' => $nosur,
                 'kepada' => $kepada,
                 'perihal' => $perihal,
                 'id_user' => Auth::id(),
                 'id_tipe_surat' => $idTipeSurat[0]['id'],
-                'created_at' => $currentDate,
+                'created_at' => $this->date->toDateTimeString(),
             ];
-            array_push($this->result, $data);
+            array_push($result, $data);
         }
 
-        NomorSurat::insert($this->result);
+        NomorSurat::insert($result);
 
-        return redirect()->route('result-surat')->with(['result'=>$this->result]);
+        return redirect()->route('result-surat')->with(['result'=>$result]);
     }
 
     public function check(){
@@ -98,18 +78,11 @@ class NomorSuratController extends Controller
 
     private function firstMeasure($banyakData, $i){
         $firstMeasure = 0;
-        if($banyakData+$i >= 1000) {
-            $firstMeasure = "";
-        }
-        else if ($banyakData+$i >= 100) {
-            $firstMeasure = "0";
-        }
-        else if ($banyakData+$i >= 10) {
-            $firstMeasure = "00";
-        }
-        else if ($banyakData+$i >= 1) {
-            $firstMeasure = "000";
-        }
+        if($banyakData+$i >= 1000) $firstMeasure = "";
+        else if ($banyakData+$i >= 100) $firstMeasure = "0";
+        else if ($banyakData+$i >= 10) $firstMeasure = "00";
+        else if ($banyakData+$i >= 1) $firstMeasure = "000";
+        
         return $firstMeasure;
     }
 }
