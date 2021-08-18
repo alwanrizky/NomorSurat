@@ -41,7 +41,7 @@
                 foreach($history as $h){
                     echo "<tr>";
                         echo "<td>".$i."</td>";
-                        echo "<td>".substr($h['created_at'], 0, 10)."</td>";
+                        echo "<td>".date('M d, Y',strtotime($h['created_at']))."</td>";
                         echo "<td>".$h['nomor_surat']."</td>";
                         echo "<td>".$h['perihal']."</td>";
                         echo "<td>".$h['kepada']."</td>";
@@ -49,7 +49,6 @@
                     $i++;
                 }
 
-                
             ?>
         </table>
         <br>
