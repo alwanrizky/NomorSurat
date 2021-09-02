@@ -66,8 +66,26 @@ class NomorSuratController extends Controller
         }
     }
 
-    public function getHistory(){
+    public function getHistory(Request $request){
+        print_r($request->ajax);
         $history = NomorSurat::where('id_user','=', Auth::id())->paginate(20);
+        if($request['dateRange']){
+            print("masuk");
+            $startDate=$request['startDate'];
+            $endDate=$request['endDate'];
+
+            $history = NomorSurat::where('id_user','=', Auth::id())
+                        ->whereBetween('created_at', [$startDate, $endDate])
+                        ->paginate(20);
+        }else{
+            $search = $request["search"];
+            $history = NomorSurat::where('id_user','=', Auth::id())
+                        ->where(function($query) use ($search){
+                            $query->where('kepada', 'like', '%'.$search.'%')
+                            ->orWhere('perihal', 'like', '%'.$search.'%');
+                        }) 
+                        ->paginate(20);
+        }
         return view('history', ['history'=>$history]);
     }
 

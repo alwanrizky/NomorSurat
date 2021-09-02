@@ -18,14 +18,22 @@
         </table>
         <br>
 
-        <div class="row ml-1">
-            <div>
-                <input id="row2" type="date">
+        <form method="post" id="form" action="/history">
+            @csrf
+            <div class="row ml-1">
+                <div>
+                    <input id="row2" type="date" name="startDate" >
+                    -
+                    <input id="row2" type="date" name="endDate">
+                    <input name="dateRange" type="checkbox" onclick="enableDateRange()">
+                    Range Tanggal
+                </div>
+                <div class="ml-auto mr-3">
+                    <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
+                </div>
+            
             </div>
-            <div class="ml-auto mr-3">
-                <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
-            </div>
-        </div>
+        </form>
         <br>
 
         <table class="center">
@@ -57,3 +65,23 @@
     
     
 </x-app-layout>
+
+<script>
+    function enableDateRange()
+		{
+			if(document.getElementsByName("dateRange")[0].checked == true)
+			{
+				document.getElementsByName("startDate")[0].disabled = false;
+                document.getElementsByName("endDate")[0].disabled = false;
+                document.getElementsByName("search")[0].disabled = true;
+			}
+			else
+			{
+                document.getElementsByName("startDate")[0].disabled = true;
+                document.getElementsByName("endDate")[0].disabled = true;
+				document.getElementsByName("search")[0].disabled = false;
+			}
+		}
+
+        // window.onload = enableDateRange;
+</script>
