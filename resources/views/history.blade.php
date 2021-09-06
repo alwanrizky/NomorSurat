@@ -18,8 +18,7 @@
         </table>
         <br>
 
-        <form method="post" id="form" action="/history">
-            @csrf
+        <form method="get" id="form" action="/history/s/">
             <div class="row ml-1">
                 <div>
                     <input id="row2" type="date" name="startDate" >
@@ -82,6 +81,5 @@
 				document.getElementsByName("search")[0].disabled = false;
 			}
 		}
-
-        // window.onload = enableDateRange;
+        window.onload = enableDateRange;
 </script>

@@ -25,7 +25,7 @@ Route::get('/result-surat', [NomorSuratController::class, 'check'])->name('resul
 
 Route::get('/history', [NomorSuratController::class, 'getHistory']);
 
-Route::post('/history', [NomorSuratController::class, 'getHistory']);
+Route::get('/history/s/', [NomorSuratController::class, 'findHistory']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
