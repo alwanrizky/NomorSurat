@@ -4,15 +4,15 @@
 
 <x-app-layout>
     <div class="container">
-        <div class="block" style="font-size=24px">
+        <div class="block">
             <a href="create-surat"><i class="fa fa-plus-circle fa-5x"></i></a><br>
             <b>Create NoSurat</b>
         </div>
-        <div class="block" style="font-size=24px">
+        <div class="block">
             <a href="#"><i class="fa fa-envelope fa-5x"></i></a><br>
             <b>Template</b>
         </div>
-        <div class="block" style="font-size=24px">
+        <div class="block">
             <a href="history"><i class="fa fa-history fa-5x"></i></a><br>
             <b>History</b>
         </div>
