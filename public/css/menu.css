@@ -2,10 +2,10 @@
     border-radius: 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    width: 70%;
     background: #d6d6d6;
-    margin: 300px auto;
+    margin: 10% auto;
     position: relative;
     text-align:center;
 }
@@ -13,9 +13,9 @@
 .menu {    
     border-radius: 25px;
     background: white;
-    height: 200px;
-    width: 200px;
-    margin: 65px;
+    height: 10%;
+    width: 15%;
+    margin: 5%;
     border: 2px solid #304fff;
     vertical-align: middle;
     line-height: 120px;  
