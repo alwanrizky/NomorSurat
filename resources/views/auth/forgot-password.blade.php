@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <!-- <x-jet-authentication-card-logo /> -->
+            <img src="{{asset('asset/Logo_UNPAR.png')}}" width="100" height="100" class="rounded mx-auto d-block image" alt="">
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
