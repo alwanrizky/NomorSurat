@@ -48,10 +48,20 @@
                                     </x-jet-button>
                                 </td>
                             </tr>
+                            
                         </table>
                     </div>
                 </form>
             </td>
+            <tr style="text-align:end;">
+                <td colspan="5">
+                @if (Route::has('password.request'))
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                </td>
+            </tr>    
         </table>
     </div>
     
