@@ -42,21 +42,29 @@
                 <th>Nomor Surat</th>
                 <th>Perihal</th>
                 <th>Kepada</th>
+                @if (Auth::user()->is_admin==1)
+                    <th>Pembuat</th>
+                @endif
+                
             </tr>
-            <?php 
-                $i = (($history->currentPage()-1)*20)+1;
-                foreach($history as $h){
-                    echo "<tr>";
-                        echo "<td>".$i."</td>";
-                        echo "<td>".date('M d, Y',strtotime($h['created_at']))."</td>";
-                        echo "<td>".$h['nomor_surat']."</td>";
-                        echo "<td>".$h['perihal']."</td>";
-                        echo "<td>".$h['kepada']."</td>";
-                    echo "</tr>";
-                    $i++;
-                }
-
+            <?php
+                $i = (($history->currentPage()-1)*20)+1
             ?>
+            @foreach ($history as $h)
+                <tr>
+                    <td>{{$i}}</td>
+                    <td>{{date('M d, Y',strtotime($h['created_at']))}}</td>
+                    <td>{{$h['nomor_surat']}}</td>
+                    <td>{{$h['perihal']}}</td>
+                    <td>{{$h['kepada']}}</td>
+                    @if (Auth::user()->is_admin==1)
+                        <th>{{$h['name']}}</th>
+                    @endif
+                </tr>
+                <?php
+                    $i++;
+                ?>
+            @endforeach
         </table>
         <br>
         {{ $history->links() }}

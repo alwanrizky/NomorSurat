@@ -9,6 +9,7 @@ use App\Http\Controllers\TipeSuratController;
 use App\Models\NomorSurat;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class NomorSuratController extends Controller
@@ -66,9 +67,19 @@ class NomorSuratController extends Controller
         }
     }
 
-    public function getHistory(Request $request){
-        $history = NomorSurat::where('id_user','=', Auth::id())->paginate(20);
-        return view('history', ['history'=>$history]);
+    public function getHistory(){
+        if(Auth::user()->is_admin==1){
+            $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
+            ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
+            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
+            ->paginate(20);
+            // print_r($history);
+            return view('history', ['history'=>$history]);
+        }else{
+            $history = NomorSurat::where('id_user','=', Auth::id())->paginate(20);
+            return view('history', ['history'=>$history]);
+        }
+        
     }
 
     public function findHistory(Request $request){
