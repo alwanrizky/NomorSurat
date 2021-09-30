@@ -20,15 +20,18 @@
 
         <form method="get" id="form" action="/history/s/">
             <div class="row ml-1">
-                <div>
+                <!-- <div>
                     <input id="row2" type="date" name="startDate" >
                     -
                     <input id="row2" type="date" name="endDate">
                     <input name="dateRange" type="checkbox" onclick="enableDateRange()">
                     Range Tanggal
-                </div>
+                </div> -->
                 <div class="ml-auto mr-3">
-                    <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
+                    <input id="row2" type="date" name="startDate" onclick="enableDateRange()" >
+                    -
+                    <input id="row2" type="date" name="endDate">
+                    <input type="text" name="search" id="row2" onclick="enableSearchBar()"> <button><i class="fa fa-search"></i></button> 
                 </div>
             
             </div>
@@ -76,18 +79,17 @@
 <script>
     function enableDateRange()
 		{
-			if(document.getElementsByName("dateRange")[0].checked == true)
-			{
-				document.getElementsByName("startDate")[0].disabled = false;
-                document.getElementsByName("endDate")[0].disabled = false;
-                document.getElementsByName("search")[0].disabled = true;
-			}
-			else
-			{
-                document.getElementsByName("startDate")[0].disabled = true;
-                document.getElementsByName("endDate")[0].disabled = true;
-				document.getElementsByName("search")[0].disabled = false;
-			}
+			document.getElementsByName("startDate")[0].disabled = false;
+            document.getElementsByName("endDate")[0].disabled = false;
+            document.getElementsByName("search")[0].disabled = true;
+				
 		}
-        window.onload = enableDateRange;
+
+        function enableSearhBar(){
+            document.getElementsByName("startDate")[0].disabled = true;
+            document.getElementsByName("endDate")[0].disabled = true;
+			document.getElementsByName("search")[0].disabled = false;
+        }
+        // window.onload = enableDateRange;
+        // window.onload = enableSearchBar;
 </script>

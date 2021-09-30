@@ -68,37 +68,54 @@ class NomorSuratController extends Controller
     }
 
     public function getHistory(){
-        if(Auth::user()->is_admin==1){
-            $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
+        $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
-            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->paginate(20);
-            // print_r($history);
-            return view('history', ['history'=>$history]);
+            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name');
+        
+            if(Auth::user()->is_admin==1){
+            $history = $history->paginate(20);
         }else{
-            $history = NomorSurat::where('id_user','=', Auth::id())->paginate(20);
-            return view('history', ['history'=>$history]);
+            $history = $history->where('id_user','=', Auth::id())->paginate(20);
+            
         }
+        return view('history', ['history'=>$history]);
         
     }
 
     public function findHistory(Request $request){
-        $history=null;
-        if($request['dateRange']){
-            $startDate=$request['startDate'];
-            $endDate=$request['endDate'];
+        $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
+            ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
+            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name');
 
-            $history = NomorSurat::where('id_user','=', Auth::id())
-                        ->whereBetween('created_at', [$startDate, $endDate])
-                        ->paginate(20)->withQueryString();
+            $startDate=$request['startDate'];
+            $endDate=date('Y-m-d',strtotime($request['endDate'] . "+1 days"));
+        if(Auth::user()->is_admin==1){
+            if($startDate!=null && $endDate!=null){
+                $history =$history->whereBetween('nomor_surats.created_at', [$startDate, $endDate])
+                ->paginate(20)->withQueryString();
+            }else{
+                $search = $request["search"];
+                $history = $history->where(function($query) use ($search){
+                                    $query->where('kepada', 'like', '%'.$search.'%')
+                                    ->orWhere('perihal', 'like', '%'.$search.'%')
+                                    ->orWhere('name','like', '%'.$search.'%');
+                                }) 
+                                ->paginate(20)->withQueryString();
+            }
         }else{
-            $search = $request["search"];
-            $history = NomorSurat::where('id_user','=', Auth::id())
-                        ->where(function($query) use ($search){
-                            $query->where('kepada', 'like', '%'.$search.'%')
-                            ->orWhere('perihal', 'like', '%'.$search.'%');
-                        }) 
-                        ->paginate(20)->withQueryString();
+            if($startDate!=null && $endDate!=null){
+                $history=$history->where('id_user','=', Auth::id())
+                            ->whereBetween('created_at', [$startDate, $endDate])
+                            ->paginate(20)->withQueryString();
+            }else{
+                $search = $request["search"];
+                $history = $history->where('id_user','=', Auth::id())
+                            ->where(function($query) use ($search){
+                                $query->where('kepada', 'like', '%'.$search.'%')
+                                ->orWhere('perihal', 'like', '%'.$search.'%');
+                            }) 
+                            ->paginate(20)->withQueryString();
+            }
         }
         return view('history', ['history'=>$history]);
     }
