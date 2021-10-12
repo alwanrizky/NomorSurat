@@ -20,17 +20,22 @@
 
         <form method="get" id="form" action="/history/s/">
             <div class="row ml-1">
-                <!-- <div>
+                <div>
                     <input id="row2" type="date" name="startDate" >
                     -
                     <input id="row2" type="date" name="endDate">
-                    <input name="dateRange" type="checkbox" onclick="enableDateRange()">
-                    Range Tanggal
-                </div> -->
+                    <!-- <input name="dateRange" type="checkbox" onclick="enableDateRange()">
+                    Range Tanggal -->
+                </div>
                 <div class="ml-auto mr-3">
-                    <input id="row2" type="date" name="startDate" onclick="enableDateRange()" >
-                    -
-                    <input id="row2" type="date" name="endDate">
+                    <select class="tipesurat" id="row2"  name="aliasTipeSurat">
+                        <option value=''>-</option>
+                        <?php
+                            foreach($tipeSurat as $tipe){
+                                echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
+                            }
+                        ?>
+                    </select>
                     <input type="text" name="search" id="row2" onclick="enableSearchBar()"> <button><i class="fa fa-search"></i></button> 
                 </div>
             

@@ -78,7 +78,7 @@ class NomorSuratController extends Controller
             $history = $history->where('id_user','=', Auth::id())->paginate(20);
             
         }
-        return view('history', ['history'=>$history]);
+        return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
         
     }
 
