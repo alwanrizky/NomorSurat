@@ -17,8 +17,7 @@
             </tr>
 
             <?php
-                // $i = (($history->currentPage()-1)*20)+1
-                $i=1;
+                $i = (($users->currentPage()-1)*20)+1
             ?>
             @foreach ($users as $u)
                 <tr>
@@ -43,6 +42,7 @@
             @endforeach
             
         </table>
+        {{ $users->links() }}
         <br>
     </div>
     
