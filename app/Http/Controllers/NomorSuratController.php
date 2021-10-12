@@ -70,9 +70,10 @@ class NomorSuratController extends Controller
     public function getHistory(){
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
-            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name');
+            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
+            ->orderBy('nomor_surats.created_at', 'asc');
         
-            if(Auth::user()->is_admin==1){
+        if(Auth::user()->is_admin==1){
             $history = $history->paginate(20);
         }else{
             $history = $history->where('id_user','=', Auth::id())->paginate(20);
@@ -85,7 +86,8 @@ class NomorSuratController extends Controller
     public function findHistory(Request $request){
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
-            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name');
+            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
+            ->orderBy('nomor_surats.created_at', 'asc');;
 
             $startDate=$request['startDate'];
             $endDate=date('Y-m-d',strtotime($request['endDate'] . "+1 days"));
@@ -95,29 +97,50 @@ class NomorSuratController extends Controller
                 ->paginate(20)->withQueryString();
             }else{
                 $search = $request["search"];
-                $history = $history->where(function($query) use ($search){
+                if($search){
+                    $history = $history->where(function($query) use ($search){
                                     $query->where('kepada', 'like', '%'.$search.'%')
                                     ->orWhere('perihal', 'like', '%'.$search.'%')
                                     ->orWhere('name','like', '%'.$search.'%');
-                                }) 
+                                })
                                 ->paginate(20)->withQueryString();
+                }else{
+                    $id = $request['idTipeSurat'];
+                    $history = $history->where(function($query) use ($id){
+                        $query->where('id_tipe_surat', '=',$id);
+                    })
+                    ->paginate(20)->withQueryString();
+                }
+                
             }
         }else{
             if($startDate!=null && $endDate!=null){
                 $history=$history->where('id_user','=', Auth::id())
                             ->whereBetween('created_at', [$startDate, $endDate])
-                            ->paginate(20)->withQueryString();
+                            ->paginate(20)->withQueryString();;
             }else{
                 $search = $request["search"];
-                $history = $history->where('id_user','=', Auth::id())
+                if($search){
+                    $history = $history->where('id_user','=', Auth::id())
                             ->where(function($query) use ($search){
                                 $query->where('kepada', 'like', '%'.$search.'%')
                                 ->orWhere('perihal', 'like', '%'.$search.'%');
-                            }) 
-                            ->paginate(20)->withQueryString();
+                            })
+                            ->paginate(20)->withQueryString();;
+                }else{
+                    $id = $request['idTipeSurat'];
+                    $history = $history->where('id_user','=', Auth::id())
+                            ->where(function($query) use ($id){
+                                $query->where('id_tipe_surat', '=', $id);
+                            })
+                            ->paginate(20)->withQueryString();;
+                            
+                }
+                
             }
         }
-        return view('history', ['history'=>$history]);
+
+        return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
     private function countSurat($year){

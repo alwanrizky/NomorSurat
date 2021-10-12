@@ -28,11 +28,11 @@
                     Range Tanggal -->
                 </div>
                 <div class="ml-auto mr-3">
-                    <select class="tipesurat" id="row2"  name="aliasTipeSurat">
+                    <select class="tipesurat" id="row2"  name="idTipeSurat">
                         <option value=''>-</option>
                         <?php
                             foreach($tipeSurat as $tipe){
-                                echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
+                                echo "<option value='".$tipe['id']."'>".$tipe['tipe_surat']."</option>";
                             }
                         ?>
                     </select>
@@ -52,6 +52,7 @@
                 <th>Kepada</th>
                 @if (Auth::user()->is_admin==1)
                     <th>Pembuat</th>
+                    <th>Delete</th>
                 @endif
                 
             </tr>
@@ -66,7 +67,8 @@
                     <td>{{$h['perihal']}}</td>
                     <td>{{$h['kepada']}}</td>
                     @if (Auth::user()->is_admin==1)
-                        <th>{{$h['name']}}</th>
+                        <td>{{$h['name']}}</td>
+                        <td><button class="btn btn-light" onclick="deleteNoSur('.$id.')"><i class="fa fa-trash"></i></button></td>
                     @endif
                 </tr>
                 <?php
