@@ -103,7 +103,7 @@
                             </x-jet-dropdown-link>
 
                             @if (Auth::user()->is_admin==1)
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                <x-jet-dropdown-link href="/user-control">
                                     {{ __('User Control') }}
                                 </x-jet-dropdown-link>
                             @endif

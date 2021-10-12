@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\NomorSuratController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('index');
@@ -25,6 +26,8 @@ Route::get('/result-surat', [NomorSuratController::class, 'check'])->name('resul
 Route::get('/history', [NomorSuratController::class, 'getHistory']);
 
 Route::get('/history/s/', [NomorSuratController::class, 'findHistory']);
+
+Route::get('/user-control', [UserController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
