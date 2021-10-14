@@ -71,7 +71,8 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->orderBy('nomor_surats.created_at', 'desc');
+            ->orderBy('nomor_surats.created_at', 'desc')
+            ->orderBy('nomor_surats.id', 'desc');
         
         if(Auth::user()->is_admin==1){
             $history = $history->paginate(20);
@@ -87,7 +88,9 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->orderBy('nomor_surats.created_at', 'asc');;
+            ->where('udpated_at','=', null)
+            ->orderBy('nomor_surats.created_at', 'desc')
+            ->orderBy('nomor_surats.id', 'desc');
 
             $startDate=$request['startDate'];
             $endDate=date('Y-m-d',strtotime($request['endDate'] . "+1 days"));
@@ -143,6 +146,21 @@ class NomorSuratController extends Controller
         return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
+    public function delete(Request $request){
+        print_r($request['id']);
+        return view('dashboard');
+        // $nosur = NomorSurat::find($request['id']);
+        // $nosur->created_ad = $this->date->toDateTimeString();
+
+        // $nosur->save();
+        // // NomorSurat::where('$id', $request['id'])
+        // // ->update([
+        // //     'updated_at' => $this->date->toDateTimeString(),
+        // //     ]);
+        // return json_encode(array('statusCode'=>200));
+
+    }
+
     private function countSurat($year){
         $query = NomorSurat::where('created_at','Like', '%'.$year.'%');
         return $query->count();
@@ -157,4 +175,6 @@ class NomorSuratController extends Controller
         
         return $firstMeasure;
     }
+
+    
 }

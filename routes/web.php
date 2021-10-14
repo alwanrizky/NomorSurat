@@ -27,6 +27,8 @@ Route::get('/history', [NomorSuratController::class, 'getHistory']);
 
 Route::get('/history/s/', [NomorSuratController::class, 'findHistory']);
 
+Route::post('/history/delete/{id}', [NomorSuratController::class, 'delete'])->name('delete');
+
 Route::get('/user-control', [UserController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
