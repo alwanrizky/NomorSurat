@@ -69,9 +69,9 @@ class NomorSuratController extends Controller
 
     public function getHistory(){
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
-            ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
+            ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->orderBy('nomor_surats.created_at', 'asc');
+            ->orderBy('nomor_surats.created_at', 'desc');
         
         if(Auth::user()->is_admin==1){
             $history = $history->paginate(20);

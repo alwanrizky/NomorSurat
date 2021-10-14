@@ -44,6 +44,12 @@
         </table>
         {{ $users->links() }}
         <br>
+        <table style="width: 20%; border: none;">
+            <tr style="border: none;">
+                <td style="border: none;"><input type="submit" id="submit" name="create" value="Change"></td>
+                <td style="border: none;"><button> User</button></td>
+            </tr>
+        </table>
     </div>
     
     

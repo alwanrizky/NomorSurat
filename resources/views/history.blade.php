@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="{{URL::asset('css/history.css')}}"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <x-app-layout>
     <!-- head -->
     
@@ -68,7 +73,7 @@
                     <td>{{$h['kepada']}}</td>
                     @if (Auth::user()->is_admin==1)
                         <td>{{$h['name']}}</td>
-                        <td><button class="btn btn-light" onclick="deleteNoSur('.$id.')"><i class="fa fa-trash"></i></button></td>
+                        <td><button class="btn btn-light" onclick="deleteNoSur({{$h}})" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash fa-5"></i></button></td>
                     @endif
                 </tr>
                 <?php
@@ -78,25 +83,49 @@
         </table>
         <br>
         {{ $history->links() }}
+    </div>   
+    
+
+    <!-- Reference: https://www.w3schools.com/bootstrap4/bootstrap_modal.asp -->
+    <div class="container">
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h4 id="nomor_surat"></h4>
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <table style="border: none;">
+                            <tr style="border: none;">
+                                <td style="width: 50%; border: none;"><button type="button" class="btn" data-dismiss="modal">Close</button></td>
+                                <td style="border: none;"><button type="button" class="btn" data-dismiss="modal">Yes</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
     </div>
-    
-    
+   
 </x-app-layout>
 
 <script>
-    function enableDateRange()
-		{
-			document.getElementsByName("startDate")[0].disabled = false;
-            document.getElementsByName("endDate")[0].disabled = false;
-            document.getElementsByName("search")[0].disabled = true;
-				
-		}
-
-        function enableSearhBar(){
-            document.getElementsByName("startDate")[0].disabled = true;
-            document.getElementsByName("endDate")[0].disabled = true;
-			document.getElementsByName("search")[0].disabled = false;
-        }
-        // window.onload = enableDateRange;
-        // window.onload = enableSearchBar;
+    function deleteNoSur($h){
+        console.log("Apakah Anda yakin ingin menghapus nomor berikut?" + $h['id'] + " " +$h['nomor_surat']);
+        document.getElementById("nomor_surat").innerHTML = $h['nomor_surat'];
+    }
 </script>
+
