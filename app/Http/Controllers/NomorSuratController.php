@@ -71,6 +71,7 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
+            ->where('nomor_surats.updated_at','=', NULL)
             ->orderBy('nomor_surats.created_at', 'desc')
             ->orderBy('nomor_surats.id', 'desc');
         
@@ -88,7 +89,7 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->where('udpated_at','=', null)
+            ->where('nomor_surats.updated_at','=', NULL)
             ->orderBy('nomor_surats.created_at', 'desc')
             ->orderBy('nomor_surats.id', 'desc');
 
@@ -147,10 +148,13 @@ class NomorSuratController extends Controller
     }
 
     public function delete(Request $request){
-        print_r($request['id']);
-        return view('dashboard');
-        // $nosur = NomorSurat::find($request['id']);
-        // $nosur->created_ad = $this->date->toDateTimeString();
+        // print_r($request['id']);
+        // return view('dashboard');
+        $nosur = NomorSurat::find($request['id']);
+        $nosur->updated_at = $this->date->toDateTimeString();
+        $nosur->save();
+
+        return redirect()->back();
 
         // $nosur->save();
         // // NomorSurat::where('$id', $request['id'])

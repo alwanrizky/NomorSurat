@@ -92,37 +92,39 @@
         <!-- The Modal -->
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form method="post" id="form" action="/history/delete/99"> 
-                        @csrf
-                        <!-- Modal body -->
-                        <div class="modal-body" style="text-align: center;">
-                            <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
-                            <input type="text" id="nomor_surat" value="" style="text-align: center;">
+            <form method="post" id="formId" action=>     
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <table style="border: none;">
-                                <tr style="border: none;">
-                                    <td style="width: 50%; border: none;">
-                                        <button type="button" class="btn" data-dismiss="modal">Close</button>
-                                    </td>
-                                    
-                                    <td style="border: none;">
-                                        <input type="submit" class="btn" data-dismiss="modal" value="Yes">
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
-                </div>
+                            @csrf
+                            <!-- Modal body -->
+                            <div class="modal-body" style="text-align: center;">
+                                <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
+                                <input type="text" id="nomor_surat" value="" style="text-align: center;">
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <table style="border: none;">
+                                    <tr style="border: none;">
+                                        <td style="width: 50%; border: none;">
+                                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                                        </td>
+                                        
+                                        <td style="border: none;">
+                                            <input type="submit" class="btn" value="Yes">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        
+                    </div>
+                </form>
             </div>
         </div>
   
@@ -135,6 +137,7 @@
         console.log("Apakah Anda yakin ingin menghapus nomor berikut?" + $h['id'] + " " +$h['nomor_surat']);
         document.getElementById("nomor_surat").value = $h['nomor_surat'];
 
+        $('#formId').attr('action', "/history/delete/"+$h['id']);
         
     }
 </script>
