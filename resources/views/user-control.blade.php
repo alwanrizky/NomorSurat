@@ -24,15 +24,24 @@
                     <td>{{$i}}</td>
                     <td>{{$u['name']}}</td>
                     <td>{{$u['email']}}</td>
-                    <td><input name="admin-{{$u['id']}}" type="checkbox" checked=
-                    @if ($u['is_admin']==1)
-                        "checked";
-                    @endif> </td>
+                    <td>
+                        <input name="admin-{{$u['id']}}" type="checkbox"
+                            <?php
+                                if($u['is_admin']==1){
+                                    echo "checked";
+                                }
+                            ?>
+                        >
+                    </td>
 
-                    <td><input name="active-{{$u['id']}}" type="checkbox" checked=
-                    @if ($u['is_active']==1)
-                        "checked";
-                    @endif
+                    <td>
+                        <input name="active-{{$u['id']}}" type="checkbox" 
+                            <?php
+                                if($u['is_active']==1){
+                                    echo "checked";
+                                }
+                            ?>
+                            >
                     </td>
                     
                 </tr>
@@ -46,8 +55,12 @@
         <br>
         <table style="width: 20%; border: none;">
             <tr style="border: none;">
-                <td style="border: none;"><input type="submit" id="submit" name="create" value="Change"></td>
-                <td style="border: none;"><button> User</button></td>
+                <td style="border: none;">
+                    <input type="submit" id="change" name="change" value="CHANGE" class="btn btn-outline-dark" style="margin-right: 20px;">
+                </td>
+                <td style="border: none;">
+                    <input type="submit" id="add-user" name="add-user" value="ADD USER" class="btn btn-outline-dark">
+                </td>
             </tr>
         </table>
     </div>
