@@ -62,16 +62,16 @@
         </table>
         {{ $users->links() }}
         <br>
-        <table style="width: 20%; border: none;">
+        <!-- <table style="width: 20%; border: none;">
             <tr style="border: none;">
                 <td style="border: none;">
                     <input type="submit" id="change" name="change" value="CHANGE" class="btn btn-outline-dark" style="margin-right: 20px;">
                 </td>
-                <td style="border: none;">
+                <td style="border: none;"> -->
                     <input type="submit" id="add-user" name="add-user" value="ADD USER" class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal">
-                </td>
+                <!-- </td>
             </tr>
-        </table>
+        </table> -->
     </div>
 
     <div class="container">
