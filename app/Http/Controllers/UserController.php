@@ -34,4 +34,17 @@ class UserController extends Controller
         return redirect()->back();
         
     }
+
+    function edit(Request $request){
+        $user =User::find($request['id']);
+
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->is_admin = ($request['is_admin']=='on') ? 1: null;
+        $user->is_active = ($request['is_active']=='on') ? 1: null;
+
+        $user->save();
+
+        return redirect()->back();
+    }
 }

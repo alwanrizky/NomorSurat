@@ -19,6 +19,7 @@
                 <th>e-mail</th>
                 <th>Admin</th>
                 <th>Aktif</th>
+                <th>Edit</th>
             </tr>
 
             <?php
@@ -30,7 +31,7 @@
                     <td>{{$u['name']}}</td>
                     <td>{{$u['email']}}</td>
                     <td>
-                        <input name="admin-{{$u['id']}}" type="checkbox"
+                        <input name="admin-{{$u['id']}}" type="checkbox" disabled
                             <?php
                                 if($u['is_admin']==1){
                                     echo "checked";
@@ -40,13 +41,16 @@
                     </td>
 
                     <td>
-                        <input name="active-{{$u['id']}}" type="checkbox" 
+                        <input name="active-{{$u['id']}}" type="checkbox" disabled
                             <?php
                                 if($u['is_active']==1){
                                     echo "checked";
                                 }
                             ?>
                             >
+                    </td>
+                    <td>
+                        <button class="btn btn-light" onclick="editUser({{$u}})" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit fa-5">
                     </td>
                     
                 </tr>
@@ -78,12 +82,12 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Add User</h4>
+                        <h4 class="modal-title" id="header">Add User</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                 
-                        <form method="POST" action="/user-control/add-user">
+                        <form method="POST" id="formId" action="/user-control/add">
                             @csrf
 
                             <div class="mt-4">
@@ -98,19 +102,19 @@
 
                             <div class="mt-4">
                                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required/>
                             </div>
 
                             <div class="mt-4">
-                                <input type="checkbox" name="is_admin">
+                                <input type="checkbox" name="is_admin" id="is_admin">
                                 <label for="is_admin"> Admin </label>
-                                <input type="checkbox" name="is_active" checked>
+                                <input type="checkbox" name="is_active" checked id="is_active">
                                 <label for="is_active"> Active </label>
                             </div>
 
                             <div class="modal-footer">
                                 <div class="flex items-center justify-end mt-4">
-                                    <input type="submit" class="btn btn btn-secondary" value="Add User">
+                                    <input type="submit" class="btn btn btn-secondary" id="btn" value="Add User">
                                 </div>
                             </div>
                         </form>
@@ -120,7 +124,18 @@
         </div>
   
     </div>
-    
-    
 </x-app-layout>
 
+<script>
+    function editUser($u){
+        $('#header').text("Edit User");
+        $('#formId').attr('action', "/user-control/edit/"+$u['id']);
+        $('#name').attr('value', $u['name']);
+        $('#email').attr('value', $u['email']);
+        $("#password").attr('disabled','disabled');
+        $("#password").hide();
+        $('#is_admin').prop('checked',$u['is_admin']);
+        $('#is_active').prop('checked',$u['is_active']);
+        $('#btn').attr('value', "Save");
+    }
+</script>
