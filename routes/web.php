@@ -31,6 +31,8 @@ Route::post('/history/delete/{id}', [NomorSuratController::class, 'delete'])->na
 
 Route::get('/user-control', [UserController::class, 'index']);
 
+Route::post('/user-control/add-user',[UserController::class, 'store']);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
