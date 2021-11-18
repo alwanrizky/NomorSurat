@@ -16,8 +16,8 @@ class CreateAtrSuratTable extends Migration
         Schema::create('atr_surats', function (Blueprint $table) {
             $table->id();
             $table->string("key");
-            $table->string("value");
-            // $table->foreignId('id_template_surat')->constrained('template_surats');
+            $table->string("tipe");
+            $table->foreignId('id_template_surat')->constrained('template_surats');
             $table->timestamps();
         });
     }

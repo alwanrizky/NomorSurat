@@ -3,6 +3,9 @@
 
 <x-app-layout>
     <div class="container" style="width: 60%;">
+        <?php
+            print(Session::get('message'));
+        ?>
         <form method="post" id="form" action="/upload-template">
             @csrf
             <div>
@@ -29,9 +32,17 @@
                     </thead>
                     @for ($i=0;$i<10;$i++)
                         <tr>
-                            <td><input type="text" id="atr-{{$i}}" name="atr-{{$i}}" placeholder="Atribut"></td>
+                            <td><input type="text" id="atr-{{$i}}" name="atr-{{$i}}" placeholder="Atribut" 
+                            @if ($i==0)
+                                required
+                            @endif>
+                            </td>
                             <td>
-                                <select id="tipeData" name="tipeData-{{$i}}">
+                                <select id="tipeData" name="tipeData-{{$i}}"
+                                @if ($i==0)
+                                    required
+                                @endif>
+                                >
                                     <option value="teks">Teks</option>
                                     <option value="number">Number</option>
                                 </select>

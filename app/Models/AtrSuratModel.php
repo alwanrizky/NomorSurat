@@ -12,5 +12,11 @@ class AtrSuratModel extends Model
     protected $fillable = [
         'key',
         'tipe',
+        'id_template_surat'
     ];
+
+    public function atrSurat(){
+        return $this->belongTo(TemplateSuratModel::class, 'id','id_template_surat');
+    }
+    
 }

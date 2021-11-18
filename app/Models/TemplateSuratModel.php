@@ -17,4 +17,9 @@ class TemplateSuratModel extends Model
     public function tipeSurat(){
         return $this->belongTo(User::class, 'id','id_user');
     }
+
+    // id table FK, id table ini
+    public function atrSurat(){
+        return $this->hasMany(AtrSuratModel::class,'id_atr_surat','id');
+    }
 }
