@@ -59,6 +59,7 @@
                     <th>Pembuat</th>
                     <th>Delete</th>
                 @endif
+                <th>Buat surat</th>
                 
             </tr>
             <?php
@@ -73,8 +74,16 @@
                     <td>{{$h['kepada']}}</td>
                     @if (Auth::user()->is_admin==1)
                         <td>{{$h['name']}}</td>
-                        <td><button class="btn btn-light" onclick="deleteNoSur({{$h}})" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash fa-5"></i></button></td>
+                        <td>
+                            <button class="btn btn-light" onclick="deleteNoSur({{$h}})" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-trash fa-5"></i>
+                            </button>
+                        </td>
                     @endif
+                    <td>
+                        <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1">
+                            <i class="fa fa-plus fa-5"></i>
+                        </button></td>
                 </tr>
                 <?php
                     $i++;
@@ -88,7 +97,6 @@
 
     <!-- Reference: https://www.w3schools.com/bootstrap4/bootstrap_modal.asp -->
     <div class="container">
-
         <!-- The Modal -->
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -127,7 +135,51 @@
                 </form>
             </div>
         </div>
-  
+    </div>
+
+    <div class="container">
+        <!-- The Modal -->
+        <div class="modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <form method="post" id="formId1" action=>     
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                            @csrf
+                            <!-- Modal body -->
+                            <div class="modal-body" style="text-align: center;">
+                                <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
+                                <input type="text" id="nomor_surat1" value="" style="text-align: center;">
+
+                                <br>
+                                <br>
+                                
+                                <select id="template" name="template" required>
+                                <option value="teks">Teks</option>
+                                <option value="number">Number</option>
+                            <?php
+                                // foreach($tipeSurat as $tipe){
+                                //     echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
+                                // }
+                                
+                            ?>
+                        </select>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn" value="Buat Surat" style="margin-right: 42%;">
+                            </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
    
 </x-app-layout>
@@ -138,6 +190,13 @@
         document.getElementById("nomor_surat").value = $h['nomor_surat'];
 
         $('#formId').attr('action', "/history/delete/"+$h['id']);
+        
+    }
+    function buatSurat($h){
+        console.log("Apakah Anda yakin ingin menghapus nomor berikut?" + $h['id'] + " " +$h['nomor_surat']);
+        document.getElementById("nomor_surat1").value = $h['nomor_surat'];
+
+        // $('#formId1').attr('action', "/history/delete/"+$h['id']);
         
     }
 </script>
