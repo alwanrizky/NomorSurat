@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TemplateSuratModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +71,9 @@ class TemplateSuratController extends Controller
 
     private function getId($namaSurat){
         return DB::table('template_surats')->where('nama_surat', $namaSurat)->value('id');
+    }
+
+    public function getTemplateSurat(){
+        return DB::table('template_surats')->get();
     }
 }

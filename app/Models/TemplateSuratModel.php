@@ -10,6 +10,7 @@ class TemplateSuratModel extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'nama_surat',
         'id_user',
     ];

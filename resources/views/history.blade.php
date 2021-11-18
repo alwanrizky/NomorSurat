@@ -154,21 +154,18 @@
                             <!-- Modal body -->
                             <div class="modal-body" style="text-align: center;">
                                 <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
-                                <input type="text" id="nomor_surat1" value="" style="text-align: center;">
+                                <input type="text" id="nomor_surat1" value="" style="text-align: center; width:80%;">
 
                                 <br>
                                 <br>
-                                
-                                <select id="template" name="template" required>
-                                <option value="teks">Teks</option>
-                                <option value="number">Number</option>
-                            <?php
-                                // foreach($tipeSurat as $tipe){
-                                //     echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
-                                // }
-                                
-                            ?>
-                        </select>
+
+                                <select id="template" name="template" required style="width:80%;">
+                                    <?php
+                                        foreach($template as $temp){
+                                            echo "<option value='".$temp->id."'>".$temp->nama_surat."</option>";
+                                        }   
+                                    ?>
+                                </select>
                             </div>
                             
                             <!-- Modal footer -->
