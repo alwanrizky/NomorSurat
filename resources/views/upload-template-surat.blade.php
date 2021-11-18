@@ -3,7 +3,7 @@
 
 <x-app-layout>
     <div class="container" style="width: 60%;">
-        <form method="post" id="form" action="/upload">
+        <form method="post" id="form" action="/upload-template">
             @csrf
             <div>
                <table class="table1">
@@ -13,7 +13,7 @@
                            <input type="text" id="nama" name="nama" placeholder="Nama File" required style="margin-right: 100px;">
                         </td>
                         <td>
-                            <input type="file" name="file" required> 
+                            <input type="file" name="file"> 
                         </td>
                    </tr>
                </table>
@@ -31,7 +31,7 @@
                         <tr>
                             <td><input type="text" id="atr-{{$i}}" name="atr-{{$i}}" placeholder="Atribut"></td>
                             <td>
-                                <select id="tipeData" name="tipeData">
+                                <select id="tipeData" name="tipeData-{{$i}}">
                                     <option value="teks">Teks</option>
                                     <option value="number">Number</option>
                                 </select>

@@ -62,6 +62,14 @@ class User extends Authenticatable
 
     // id table FK, id table ini
     public function nomorSurat(){
-        return $this->hasMany(nomorSurat::class,'id_user','id');
+        return $this->hasMany(NomorSurat::class,'id_user','id');
+    }
+
+    public function tipeSurat(){
+        return $this->hasMany(TipeSurat::class,'id_user','id');
+    }
+
+    public function tempplateSurat(){
+        return $this->hasMany(TemplateSuratModel::class,'id_user','id');
     }
 }

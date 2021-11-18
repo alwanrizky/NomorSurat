@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\NomorSuratController;
+use App\Http\Controllers\TemplateSuratController;
 use App\Http\Controllers\UserController;
+use App\Models\TemplateSuratModel;
 
 Route::get('/', function () {
     return view('index');
@@ -48,3 +50,5 @@ Route::get('/menu',function(){
 Route::get('/upload-template-surat',function(){
     return view('upload-template-surat');
 });
+
+Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
