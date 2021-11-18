@@ -25,7 +25,7 @@ class NomorSuratController extends Controller
     }
 
     public function index(){
-        return view('create-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
+        return view('create-nomor-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
     public function indexSimpanSurat(){
@@ -62,14 +62,14 @@ class NomorSuratController extends Controller
 
         NomorSurat::insert($result);
 
-        return redirect()->route('result-surat')->with(['result'=>$result]);
+        return redirect()->route('result-nomor-surat')->with(['result'=>$result]);
     }
 
     public function check(){
         if(Session::get('result')!=null){
-            return view('result-surat');
+            return view('result-nomor-surat');
         }else{
-            return redirect()->route('create-surat');
+            return redirect()->route('create-nomor-surat');
         }
     }
 

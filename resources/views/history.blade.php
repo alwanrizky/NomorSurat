@@ -190,7 +190,7 @@
         
     }
     function buatSurat($h){
-        console.log("Apakah Anda yakin ingin menghapus nomor berikut?" + $h['id'] + " " +$h['nomor_surat']);
+        console.log("Silakan pilih template surat untuk surat dengan nomor berikut" + $h['id'] + " " +$h['nomor_surat']);
         document.getElementById("nomor_surat1").value = $h['nomor_surat'];
 
         // $('#formId1').attr('action', "/history/delete/"+$h['id']);

@@ -44,7 +44,7 @@
                                 @endif>
                                 >
                                     <option value="teks">Teks</option>
-                                    <option value="number">Number</option>
+                                    <option value="teksarea">Teks Area</option>
                                 </select>
                             </td>
                         </tr>

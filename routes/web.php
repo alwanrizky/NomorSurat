@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
 
-Route::get('/result-surat', [NomorSuratController::class, 'check'])->name('result-surat');
+Route::get('/result-nomor-surat', [NomorSuratController::class, 'check'])->name('result-nomor-surat');
 
 Route::get('/history', [NomorSuratController::class, 'getHistory']);
 
@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/create-surat',[NomorSuratController::class, 'index'])->name('create-surat');
+Route::get('/create-nomor-surat',[NomorSuratController::class, 'index'])->name('create-nomor-surat');
 
 Route::get('/menu',function(){
     return view('menu');

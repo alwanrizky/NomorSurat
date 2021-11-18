@@ -5,7 +5,7 @@
     <div class="container" style="width: 70%;">
        
             <div class="menu">
-                <a href="create-surat"><i class="fa fa-plus-circle fa-5x"></i></a><br>
+                <a href="create-nomor-surat"><i class="fa fa-plus-circle fa-5x"></i></a><br>
                 <b>Create NoSurat</b>
             </div>
             @if (Auth::user()->is_admin==1)
