@@ -17,6 +17,10 @@
                 <a href=""><i class="fa fa-plus-circle fa-5x"></i></a><br>
                 <b>Create Tipe Surat</b>
             </div>
+            <div class="menu">
+                <a href="simpan-surat"><i class="fa fa-save fa-5x"></i></a><br>
+                <b>Simpan Surat</b>
+            </div>
             @endif
             <div class="menu">
                 <a href="history"><i class="fa fa-history fa-5x"></i></a><br>

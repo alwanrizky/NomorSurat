@@ -52,3 +52,6 @@ Route::get('/upload-template-surat',function(){
 });
 
 Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
+
+Route::get('/simpan-surat',[NomorSuratController::class, 'indexSimpanSurat']);
+
