@@ -38,8 +38,21 @@ class TemplateSuratController extends Controller
         }
 
         $this->atrSurat->store($idTemplate, $arrArt);
+
+        $this->uploadFile($request);
         return redirect()->back()->with('message','Berhasil mengupload template surat dengan nama: '.$namaSurat);
 
+    }
+
+    /**
+     * Function for upload csv into folder upload in public
+     */
+    private function uploadFile($request){
+        $file = $request->file('file');
+        $fileName = $request->nama.".docx";
+        $savePath = public_path('/upload/');
+        $file->move($savePath, $fileName);
+        return $savePath.$fileName;
     }
 
     private function store($namaSurat){

@@ -6,7 +6,7 @@
         <?php
             print(Session::get('message'));
         ?>
-        <form method="post" id="form" action="/upload-template">
+        <form method="post" id="form" action="/upload-template" enctype="multipart/form-data">
             @csrf
             <div>
                <table class="table1">
