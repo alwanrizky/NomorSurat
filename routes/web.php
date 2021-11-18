@@ -44,3 +44,7 @@ Route::get('/create-surat',[NomorSuratController::class, 'index'])->name('create
 Route::get('/menu',function(){
     return view('menu');
 });
+
+Route::get('/upload-template-surat',function(){
+    return view('upload-template-surat');
+});

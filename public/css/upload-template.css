@@ -1,0 +1,10 @@
+.container {
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: #d6d6d6;
+    margin: 200px auto;
+    position: relative;
+    text-align:center;
+}

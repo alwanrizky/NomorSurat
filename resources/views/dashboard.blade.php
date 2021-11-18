@@ -10,7 +10,7 @@
             </div>
             @if (Auth::user()->is_admin==1)
             <div class="menu">
-                <a href=""><i class="fa fa-bars fa-5x"></i></a><br>
+                <a href="upload-template-surat"><i class="fa fa-upload fa-5x"></i></a><br>
                 <b>Create Template</b>
             </div>
             <div class="menu">
