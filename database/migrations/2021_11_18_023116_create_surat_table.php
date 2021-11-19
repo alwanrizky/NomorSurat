@@ -15,7 +15,11 @@ class CreateSuratTable extends Migration
     {
         Schema::create('surat', function (Blueprint $table) {
             $table->id();
+            $table->string('kepada');
+            $table->string('perihal');
+            $table->date('tanggal');
             $table->foreignId('id_user')->constrained('users');
+            $table->foreignId('id_tipe_surat')->constrained('tipe_surats');
             $table->timestamps();
         });
     }

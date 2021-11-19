@@ -28,10 +28,6 @@ class NomorSuratController extends Controller
         return view('create-nomor-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
-    public function indexSimpanSurat(){
-        return view('simpan-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
-    }
-
     public function generateSurat(Request $request){
         // hitung banyaknya data di db nomorsurat
         $banyakData = $this->countSurat($this->date->year);

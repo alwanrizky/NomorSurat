@@ -4,6 +4,10 @@
 
 <x-app-layout>
 <div class="container" style="width: 60%;">
+        <?php
+            print(Session::get('message'));
+        ?>
+
         <form method="post" id="form" action="/simpan-surat">
             @csrf
             <br>
@@ -17,7 +21,7 @@
 
                 <tr>
                     <td>
-                        <label for="perihal">Kepada&emsp;&nbsp;&emsp;:&emsp;</label>
+                        <label for="kepada">Kepada&emsp;&nbsp;&emsp;:&emsp;</label>
                         <input type="text" id="kepada" name="kepada" placeholder="Kepada" required><br>
                     </td>
                 </tr>
@@ -37,7 +41,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="perihal">Tanggal&emsp;&emsp;:&emsp;</label>
+                        <label for="tanggal">Tanggal&emsp;&emsp;:&emsp;</label>
                         <input id="row2" type="date" name="date" >
                     </td>
                 </tr>
