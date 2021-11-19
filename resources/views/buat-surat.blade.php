@@ -19,7 +19,7 @@
                     </td>
                 </tr>
 
-                @foreach ($atribut as $atr){
+                @foreach ($atribut as $atr)
                     <tr>
                         <td>{{$atr->key}} </td>
                         <td style="padding: 10px;">:</td>
@@ -27,7 +27,6 @@
                             <input type={{$atr->tipe}} id={{$atr->key}} name={{$atr->key}} value=>   
                         </td>
                     </tr>
-                }
                     
                 @endforeach
                 
