@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\NomorSuratController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TemplateSuratController;
 use App\Http\Controllers\UserController;
-use App\Models\TemplateSuratModel;
 
 Route::get('/', function () {
     return view('index');
@@ -54,7 +54,10 @@ Route::get('/upload-template-surat',function(){
 
 Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
 
-Route::get('/simpan-surat',[SuratController::class, 'indexSimpanSurat'])->name('simpan-surat');
+Route::get('/simpan-surat',[SuratMasukController::class, 'indexSimpanSurat'])->name('simpan-surat');
 
-Route::post('/simpan-surat',[SuratController::class, 'store']);
+Route::post('/simpan-surat',[SuratMasukController::class, 'store']);
+
+Route::post('/buat-surat',[SuratController::class, 'index']);
+
 

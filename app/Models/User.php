@@ -70,6 +70,6 @@ class User extends Authenticatable
     }
 
     public function tempplateSurat(){
-        return $this->hasMany(TemplateSuratModel::class,'id_user','id');
+        return $this->hasMany(TemplateSurat::class,'id_user','id');
     }
 }

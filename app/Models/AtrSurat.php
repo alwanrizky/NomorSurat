@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AtrSuratModel extends Model
+class AtrSurat extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class AtrSuratModel extends Model
     ];
 
     public function atrSurat(){
-        return $this->belongTo(TemplateSuratModel::class, 'id','id_template_surat');
+        return $this->belongTo(TemplateSurat::class, 'id','id_template_surat');
     }
     
 }

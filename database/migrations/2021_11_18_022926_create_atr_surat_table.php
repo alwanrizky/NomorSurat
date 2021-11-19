@@ -29,6 +29,6 @@ class CreateAtrSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('atr_surat');
+        Schema::dropIfExists('atr_surats');
     }
 }

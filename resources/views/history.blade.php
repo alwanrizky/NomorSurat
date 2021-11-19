@@ -154,12 +154,12 @@
                             <!-- Modal body -->
                             <div class="modal-body" style="text-align: center;">
                                 <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
-                                <input type="text" id="nomor_surat1" value="" style="text-align: center; width:80%;">
+                                <input type="text" id="nomor_surat1" name="nomor_surat" value="" style="text-align: center; width:80%;">
 
                                 <br>
                                 <br>
 
-                                <select id="template" name="template" required style="width:80%;">
+                                <select id="template" name="id_template" required style="width:80%;">
                                     <?php
                                         foreach($template as $temp){
                                             echo "<option value='".$temp->id."'>".$temp->nama_surat."</option>";
@@ -193,8 +193,7 @@
         console.log("Silakan pilih template surat untuk surat dengan nomor berikut" + $h['id'] + " " +$h['nomor_surat']);
         document.getElementById("nomor_surat1").value = $h['nomor_surat'];
 
-        // $('#formId1').attr('action', "/history/delete/"+$h['id']);
-        
+        $('#formId1').attr('action', "/buat-surat");    
     }
 </script>
 

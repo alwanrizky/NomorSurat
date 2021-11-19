@@ -43,8 +43,8 @@
                                     required
                                 @endif>
                                 >
-                                    <option value="teks">Teks</option>
-                                    <option value="teksarea">Teks Area</option>
+                                    <option value="text">Text</option>
+                                    <option value="textarea">Text Area</option>
                                 </select>
                             </td>
                         </tr>
@@ -56,3 +56,6 @@
         </form>
     </div>
 </x-app-layout>
+<script>
+
+</script>

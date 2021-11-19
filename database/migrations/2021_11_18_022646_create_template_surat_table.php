@@ -28,6 +28,6 @@ class CreateTemplateSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('template_surat');
+        Schema::dropIfExists('template_surats');
     }
 }

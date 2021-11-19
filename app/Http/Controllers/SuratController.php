@@ -2,42 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SuratController extends Controller
 {
     //
-    private TipeSuratController $tipeSuratController;
+
+    private AtrSuratController $atrSuratController;
 
     public function __construct()
     {
-        $this->tipeSuratController = new TipeSuratController();
+        $this->atrSuratController = new AtrSuratController();
     }
 
-    public function indexSimpanSurat(){
-        return view('simpan-surat', ['tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
-    }
+    public function index(Request $request){
+        $nosur= $request->nomor_surat;
 
-    public function store(Request $request){
-
-        $perihal = $request['perihal'];
-        $kepada = $request['kepada'];
-        $tanggal = $request['date'];
-        $aliasTipeSurat = $request['aliasTipeSurat'];
-        $idTipeSurat = $this->tipeSuratController->getId($aliasTipeSurat);
-
-        DB::table('surat')->insert([
-            'kepada' => $kepada,
-            'perihal' => $perihal,
-            'tanggal' => $tanggal,
-            'id_user' => Auth::id(),
-            'id_tipe_surat' => $idTipeSurat[0]['id'],
-            'created_at' => Carbon::now('utc')->toDateTimeString(),
-        ]);
-
-        return redirect()->back()->with('message','Berhasil menyimpan surat');
+        $atr = $this->atrSuratController->getAtr($request->id_template);
+     
+        return view('buat-surat', ['nomor_surat'=>$nosur, 'atribut'=>$atr]);
     }
 }

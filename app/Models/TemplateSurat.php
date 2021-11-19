@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TemplateSuratModel extends Model
+class TemplateSurat extends Model
 {
     use HasFactory;
 
@@ -21,6 +21,6 @@ class TemplateSuratModel extends Model
 
     // id table FK, id table ini
     public function atrSurat(){
-        return $this->hasMany(AtrSuratModel::class,'id_atr_surat','id');
+        return $this->hasMany(AtrSurat::class,'id_atr_surat','id');
     }
 }

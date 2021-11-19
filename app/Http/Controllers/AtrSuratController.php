@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AtrSurat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,11 @@ class AtrSuratController extends Controller
                 'id_template_surat' =>$idTemplate,
             ]);
         }
+    }
+
+    public function getAtr($id){
+        $query = AtrSurat::where('id_template_surat',$id)->get();
+        return $query;
     }
         
 }
