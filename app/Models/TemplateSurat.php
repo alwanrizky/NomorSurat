@@ -23,4 +23,8 @@ class TemplateSurat extends Model
     public function atrSurat(){
         return $this->hasMany(AtrSurat::class,'id_atr_surat','id');
     }
+
+    public function surat(){
+        return $this->hasMany(Surat::class,'id_template_surat','id');
+    }
 }

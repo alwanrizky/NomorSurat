@@ -69,7 +69,11 @@ class User extends Authenticatable
         return $this->hasMany(TipeSurat::class,'id_user','id');
     }
 
-    public function tempplateSurat(){
+    public function templateSurat(){
         return $this->hasMany(TemplateSurat::class,'id_user','id');
+    }
+
+    public function surat(){
+        return $this->hasMany(Surat::class,'id_user','id');
     }
 }

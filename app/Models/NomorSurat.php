@@ -31,4 +31,8 @@ class NomorSurat extends Model
     public function tipeSurat(){
         return $this->belongTo(User::class, 'id','id_tipe_surat');
     }
+
+    public function surat(){
+        return $this->hasMany(NomorSurat::class,'id_nomor_surat','id');
+    }
 }
