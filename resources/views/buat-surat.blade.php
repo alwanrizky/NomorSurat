@@ -7,10 +7,14 @@
         <?php
             print(Session::get('message'));
         ?>
+        
         <form method="post" id="form" action="/download">
             @csrf
             <br>
             <table>
+                <tr>
+                    <td colspan="3" style="text-align: center;">{{$nama}}</td>
+                </tr>
                 <tr>
                     <td>Nomor Surat</td>
                     <td style="padding: 10px;">:</td>

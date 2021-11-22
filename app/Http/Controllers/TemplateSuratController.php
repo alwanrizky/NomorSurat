@@ -23,7 +23,8 @@ class TemplateSuratController extends Controller
             return redirect()->back()->with('message','Nama template surat sudah ada didalam sistem. Silakan ulangi dengan nama berbeda');
         }
 
-        $idTemplate = $this->getId($namaSurat);
+        $data = $this->getData($namaSurat,null);
+        $idTemplate = $data[0]->id;
 
         $arrArt = [];
         for($i=0;$i<10;$i++){
@@ -69,8 +70,13 @@ class TemplateSuratController extends Controller
         }
     }
 
-    private function getId($namaSurat){
-        return DB::table('template_surats')->where('nama_surat', $namaSurat)->value('id');
+    public function getData($namaSurat, $id){
+        if($namaSurat==null){
+            return DB::table('template_surats')->find($id);
+        }else{
+            return DB::table('template_surats')->where('nama_surat', $namaSurat)->get();
+        }
+        
     }
 
     public function getTemplateSurat(){
