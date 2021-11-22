@@ -60,4 +60,6 @@ Route::post('/simpan-surat',[SuratMasukController::class, 'store']);
 
 Route::post('/buat-surat',[SuratController::class, 'index']);
 
+Route::post('/create-and-download',[SuratController::class, 'createAndDownload']);
+
 

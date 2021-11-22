@@ -8,18 +8,24 @@
             print(Session::get('message'));
         ?>
         
-        <form method="post" id="form" action="/download">
+        <form method="post" id="form" action="/create-and-download">
             @csrf
             <br>
             <table>
                 <tr>
-                    <td colspan="3" style="text-align: center;">{{$nama}}</td>
+                    <td colspan="3" style="text-align: center;">
+                        <input type="text" id="nama_surat" name="nama_surat" value="{{$nama_surat}}" readonly hidden> 
+                        <h1 name="nama_surat">{{$nama_surat}}</h1>
+                        <input type="text" id="nama_surat" name="id_template" value="{{$id}}" readonly hidden> 
+                    </td>
+                    
+                    
                 </tr>
                 <tr>
                     <td>Nomor Surat</td>
                     <td style="padding: 10px;">:</td>
                     <td>
-                        <input type="text" id="nomor_surat" name="nomor_surat" value={{$nomor_surat}} disabled>   
+                        <input type="text" id="nomor_surat" name="nomor_surat" value="{{$nomor_surat}}" readonly>   
                     </td>
                 </tr>
 
@@ -28,15 +34,17 @@
                         <td>{{$atr->key}} </td>
                         <td style="padding: 10px;">:</td>
                         <td>
-                            <input type={{$atr->tipe}} id={{$atr->key}} name={{$atr->key}} value=>   
+                            @if($atr->tipe=="textarea")
+                                <textarea id={{$atr->key}} name={{$atr->key}} rows="4" cols="37">
+                                </textarea>
+                            @else
+                                <input type={{$atr->tipe}} id={{$atr->key}} name={{$atr->key}} value=>
+                            @endif
+                            
                         </td>
                     </tr>
                     
                 @endforeach
-                
-
-                
-
             </table>
 
             <br>
