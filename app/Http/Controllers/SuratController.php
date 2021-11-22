@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class SuratController extends Controller
                 'id_user'=>Auth::id(),
                 'key'=>$a->key,
                 'value'=>$request[$a->key],
+                'created_at' => Carbon::now('utc')->toDateTimeString(),
             ]);
         }
 
