@@ -35,10 +35,10 @@
                         <td style="padding: 10px;">:</td>
                         <td>
                             @if($atr->tipe=="textarea")
-                                <textarea id={{$atr->key}} name={{$atr->key}} rows="4" cols="37">
+                                <textarea id={{$atr->key}} name={{$atr->key}} rows="4" cols="37" required>
                                 </textarea>
                             @else
-                                <input type={{$atr->tipe}} id={{$atr->key}} name={{$atr->key}} value=>
+                                <input type={{$atr->tipe}} id={{$atr->key}} name={{$atr->key}} required value=>
                             @endif
                             
                         </td>

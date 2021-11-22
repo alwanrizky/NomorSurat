@@ -167,6 +167,10 @@ class NomorSuratController extends Controller
 
     }
 
+    public function findIdByNomorSurat($nomorSurat){
+        return DB::table("nomor_surats")->where('nomor_surat','Like', '%'.$nomorSurat.'%')->value('id');
+    }
+
     private function countSurat($year){
         $query = NomorSurat::where('created_at','Like', '%'.$year.'%');
         return $query->count();
