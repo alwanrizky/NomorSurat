@@ -49,6 +49,7 @@ class NomorSuratController extends Controller
                 'nomor_surat' => $nosur,
                 'kepada' => $kepada,
                 'perihal' => $perihal,
+                'surat_created' => 0,
                 'id_user' => Auth::id(),
                 'id_tipe_surat' => $idTipeSurat[0]['id'],
                 'created_at' => $this->date->toDateTimeString(),
