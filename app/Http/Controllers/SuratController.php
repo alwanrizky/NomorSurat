@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NomorSurat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -55,6 +56,10 @@ class SuratController extends Controller
                 'created_at' => Carbon::now('utc')->toDateTimeString(),
             ]);
         }
+
+        $update= NomorSurat::find($idNomorSurat);
+        $update->surat_created=1;
+        $update->save();
 
         $template->saveAs($request->nama_surat." percobaan.docx");
         return response()->download($request->nama_surat." percobaan.docx")->deleteFileAfterSend(true);

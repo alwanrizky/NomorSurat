@@ -82,12 +82,18 @@
                         </td>
                     @endif
                     <td>
-                        <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1">
-                            <i class="fa fa-plus fa-5"></i>
-                        </button>
+                        
+                            <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1" 
+                                @if ($h['surat_created']==1)
+                                    disabled
+                                @endif
+                            >
+                                <i class="fa fa-plus fa-5"></i>
+                            </button>
+                        
                     </td>
                     <td>
-                        @if ($h['surat_creted'])
+                        @if ($h['surat_created']==1)
                             <button class="btn btn-light">
                                 <i class="fa fa-download fa-5"></i>
                             </button>

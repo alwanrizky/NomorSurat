@@ -73,8 +73,7 @@ class NomorSuratController extends Controller
     public function getHistory(){
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
-            ,'nomor_surats.perihal','nomor_surats.kepada', 'users.name')
-            ->where('nomor_surats.updated_at','=', NULL)
+            ,'nomor_surats.perihal','nomor_surats.kepada','nomor_surats.surat_created', 'users.name')
             ->orderBy('nomor_surats.created_at', 'desc')
             ->orderBy('nomor_surats.id', 'desc');
         

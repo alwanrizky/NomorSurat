@@ -48,8 +48,13 @@
             </table>
 
             <br>
-            <input type="submit" id="download" name="download" value="Download">
-            
+            <input type="submit" id="download" onclick="notification()" name="download" value="Download">
         </form>
 </div>
 </x-app-layout>
+
+<script>
+    function notification(){
+        alert("Tekan ok untuk mendownload");
+    }
+</script>
