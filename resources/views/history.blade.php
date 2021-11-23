@@ -60,6 +60,7 @@
                     <th>Delete</th>
                 @endif
                 <th>Buat surat</th>
+                <th>Download</th>
                 
             </tr>
             <?php
@@ -83,7 +84,17 @@
                     <td>
                         <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1">
                             <i class="fa fa-plus fa-5"></i>
-                        </button></td>
+                        </button>
+                    </td>
+                    <td>
+                        @if ($h['surat_creted'])
+                            <button class="btn btn-light">
+                                <i class="fa fa-download fa-5"></i>
+                            </button>
+                        @else
+                            -
+                        @endif
+                    </td>
                 </tr>
                 <?php
                     $i++;
