@@ -94,9 +94,12 @@
                     </td>
                     <td>
                         @if ($h['surat_created']==1)
-                            <button class="btn btn-light">
+                        <form method="post" id="form" action="/download">
+                            @csrf
+                            <button type="submit" class="btn btn-light" name="id_nomor_surat" value="{{$h->id}}">
                                 <i class="fa fa-download fa-5"></i>
                             </button>
+                        </form>
                         @else
                             -
                         @endif

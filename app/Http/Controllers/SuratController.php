@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NomorSurat;
+use App\Models\Surat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -63,5 +64,24 @@ class SuratController extends Controller
 
         $template->saveAs($request->nama_surat." percobaan.docx");
         return response()->download($request->nama_surat." percobaan.docx")->deleteFileAfterSend(true);
+    }
+
+    public function download(Request $request){
+        $query = Surat::join('template_surats', 'template_surats.id', '=', 'surats.id_template_surat')
+                ->join('nomor_surats', 'surats.id_nomor_surat', '=', 'nomor_surats.id')
+                ->select('nama_surat', 'surats.key', 'surats.value', 'nomor_surat')
+                ->where('surats.id_nomor_surat', $request->id_nomor_surat)->get();
+
+
+        $namaSurat = $query[0]->nama_surat;
+        $nomorSurat =  $query[0]->nomor_surat;
+        
+        $template = new TemplateProcessor('upload/'.$namaSurat.'.docx');
+        foreach($query as $a){
+            $template->setValue($a->key,$a->value);
+        }
+
+        $template->saveAs($namaSurat." percobaan.docx");
+        return response()->download($namaSurat." percobaan.docx")->deleteFileAfterSend(true);
     }
 }

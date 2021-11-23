@@ -62,4 +62,4 @@ Route::post('/buat-surat',[SuratController::class, 'index']);
 
 Route::post('/create-and-download',[SuratController::class, 'createAndDownload']);
 
-
+Route::post('/download',[SuratController::class, 'download']);
