@@ -19,7 +19,8 @@ class NomorSurat extends Model
         'kepada',
         'perihal',
         'id_user',
-        'id_tipe_surat'
+        'id_tipe_surat',
+        'surat_created'
     ];
 
     // id table ini, id table FK

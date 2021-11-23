@@ -18,6 +18,7 @@ class CreateNomorSuratTable extends Migration
             $table->string('nomor_surat');
             $table->string('kepada');
             $table->string('perihal');
+            $table->binary('surat_created');
             $table->foreignId('id_user')->constrained('users');
             $table->foreignId('id_tipe_surat')->constrained('tipe_surats');
             $table->timestamps();
