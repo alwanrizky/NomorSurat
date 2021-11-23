@@ -45,6 +45,7 @@ class SuratController extends Controller
 
         // membuka lokasi file
         $template = new TemplateProcessor('upload/'.$request->nama_surat.'.docx');
+        $template->setValue('nomorSurat',$nomorSurat);
         foreach($atr as $a){
             $template->setValue($a->key,$request[$a->key]);
             // insert ke db
@@ -76,7 +77,9 @@ class SuratController extends Controller
         $namaSurat = $query[0]->nama_surat;
         $nomorSurat =  $query[0]->nomor_surat;
         
+        
         $template = new TemplateProcessor('upload/'.$namaSurat.'.docx');
+        $template->setValue('nomorSurat',$nomorSurat);
         foreach($query as $a){
             $template->setValue($a->key,$a->value);
         }
