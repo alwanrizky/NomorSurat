@@ -22,6 +22,7 @@ class CreateNomorSuratTable extends Migration
             $table->foreignId('id_user')->constrained('users');
             $table->foreignId('id_tipe_surat')->constrained('tipe_surats');
             $table->timestamps();
+            $table->date("deleted_at")->nullable(true);
         });
     }
 
