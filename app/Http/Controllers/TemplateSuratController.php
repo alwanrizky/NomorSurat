@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TemplateSuratModel;
+use App\Models\TemplateSurat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,7 @@ class TemplateSuratController extends Controller
             DB::table('template_surats')->insert([
                 'nama_surat'=>$namaSurat,
                 'id_user' => Auth::id(),
+                'created_at' => Carbon::now('utc')->toDateTimeString(),
             ]);
             return true;
         }else{
@@ -81,5 +83,30 @@ class TemplateSuratController extends Controller
 
     public function getTemplateSurat(){
         return DB::table('template_surats')->get();
+    }
+
+    public function getHistory(){
+        $history = DB::table('template_surats')
+                    ->join('users', 'template_surats.id_user','=','users.id')
+                    ->where('template_surats.updated_at',null)
+                    ->select("template_surats.id", "nama_surat","name")
+                    ->orderBy('template_surats.id', 'desc');
+    
+        if(Auth::user()->is_admin==1){
+            $history = $history->paginate(20);
+        }else{
+            $history = $history->where('id_user','=', Auth::id())->paginate(20);
+            
+        }
+        return $history;
+    }
+
+    public function delete(Request $request){
+        $temp =  TemplateSurat::find($request['id']);
+        $temp->updated_at = Carbon::now('utc')->toDateTimeString();
+        $temp->save();
+
+        return redirect()->back();
+
     }
 }
