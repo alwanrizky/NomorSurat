@@ -17,49 +17,52 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TemplateSuratController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HistoryController;
 
 Route::get('/', function () {
     return view('index');
 });
 
-Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
-
-Route::get('/result-nomor-surat', [NomorSuratController::class, 'check'])->name('result-nomor-surat');
-
-Route::get('/history', [NomorSuratController::class, 'getHistory']);
-
-Route::get('/history/s/', [NomorSuratController::class, 'findHistory']);
-
-Route::post('/history/delete/{id}', [NomorSuratController::class, 'delete'])->name('delete');
-
-Route::get('/user-control', [UserController::class, 'index']);
-
-Route::post('/user-control/add',[UserController::class, 'store']);
-
-Route::post('/user-control/edit/{id}',[UserController::class, 'edit']);
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
-Route::get('/create-nomor-surat',[NomorSuratController::class, 'index'])->name('create-nomor-surat');
 
 Route::get('/menu',function(){
     return view('menu');
 });
 
+Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
+
+// Nomor Surat
+Route::get('/result-nomor-surat', [NomorSuratController::class, 'check'])->name('result-nomor-surat');
+Route::post('/history/nomor-surat/{id}', [NomorSuratController::class, 'delete'])->name('delete');
+Route::get('/create-nomor-surat',[NomorSuratController::class, 'index'])->name('create-nomor-surat');
+
+// History Nomor Surat && Template
+Route::get('/history', [HistoryController::class, 'getHistory']);
+Route::get('/history/s/', [HistoryController::class, 'findHistoryNomorSurat']);
+
+
+
+// User
+Route::get('/user-control', [UserController::class, 'index']);
+Route::post('/user-control/add',[UserController::class, 'store']);
+Route::post('/user-control/edit/{id}',[UserController::class, 'edit']);
+
+// Template Surat
 Route::get('/upload-template-surat',function(){
     return view('upload-template-surat');
 });
-
 Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
+Route::post('/history/template-surat/{id}', [TemplateSuratController::class, 'delete'])->name('delete');
 
+// Surat Masuk
 Route::get('/simpan-surat',[SuratMasukController::class, 'indexSimpanSurat'])->name('simpan-surat');
-
 Route::post('/simpan-surat',[SuratMasukController::class, 'store']);
 
+// Buat Surat dari Template
 Route::post('/buat-surat',[SuratController::class, 'index']);
-
 Route::post('/create-and-download',[SuratController::class, 'createAndDownload']);
 
+// Download surat
 Route::post('/download',[SuratController::class, 'download']);
