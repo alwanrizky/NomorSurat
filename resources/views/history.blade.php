@@ -14,105 +14,152 @@
         <table class="center">
             <tr id="row1">
                 <td id="row1">
-                    <button>Nomor Surat</button>
+                    <button id="btnNomorSurat">Nomor Surat</button>
                 </td>
                 <td id="row1">
-                    <button>Template Surat</button>
+                    <button id="btnTemplateSurat">Template Surat</button>
                 </td>
             </tr>
         </table>
         <br>
 
-        <form method="get" id="form" action="/history/s/">
-            <div class="row ml-1">
-                <div>
-                    <input id="row2" type="date" name="startDate" >
-                    -
-                    <input id="row2" type="date" name="endDate">
-                    <!-- <input name="dateRange" type="checkbox" onclick="enableDateRange()">
-                    Range Tanggal -->
-                </div>
-                <div class="ml-auto mr-3">
-                    <select class="tipesurat" id="row2"  name="idTipeSurat">
-                        <option value=''>-</option>
-                        <?php
-                            foreach($tipeSurat as $tipe){
-                                echo "<option value='".$tipe['id']."'>".$tipe['tipe_surat']."</option>";
-                            }
-                        ?>
-                    </select>
-                    <input type="text" name="search" id="row2" onclick="enableSearchBar()"> <button><i class="fa fa-search"></i></button> 
-                </div>
-            
-            </div>
-        </form>
-        <br>
 
-        <table class="center">
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Nomor Surat</th>
-                <th>Perihal</th>
-                <th>Kepada</th>
-                @if (Auth::user()->is_admin==1)
-                    <th>Pembuat</th>
-                    <th>Delete</th>
-                @endif
-                <th>Buat surat</th>
-                <th>Download</th>
+        <div id="nomorSurat">
+            <form method="get" id="form" action="/history/s/">
+                <div class="row ml-1">
+                    <div>
+                        <input id="row2" type="date" name="startDate" >
+                        -
+                        <input id="row2" type="date" name="endDate">
+                        <!-- <input name="dateRange" type="checkbox" onclick="enableDateRange()">
+                        Range Tanggal -->
+                    </div>
+                    <div class="ml-auto mr-3">
+                        <select class="tipesurat" id="row2"  name="idTipeSurat">
+                            <option value=''>-</option>
+                            <?php
+                                foreach($tipeSurat as $tipe){
+                                    echo "<option value='".$tipe['id']."'>".$tipe['tipe_surat']."</option>";
+                                }
+                            ?>
+                        </select>
+                        <input type="text" name="search" id="row2" onclick="enableSearchBar()"> <button><i class="fa fa-search"></i></button> 
+                    </div>
                 
-            </tr>
-            <?php
-                $i = (($history->currentPage()-1)*20)+1
-            ?>
-            @foreach ($history as $h)
+                </div>
+            </form>
+            <br>
+
+            <table class="center">
                 <tr>
-                    <td>{{$i}}</td>
-                    <td>{{date('M d, Y',strtotime($h['created_at']))}}</td>
-                    <td>{{$h['nomor_surat']}}</td>
-                    <td>{{$h['perihal']}}</td>
-                    <td>{{$h['kepada']}}</td>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Nomor Surat</th>
+                    <th>Perihal</th>
+                    <th>Kepada</th>
                     @if (Auth::user()->is_admin==1)
-                        <td>{{$h['name']}}</td>
+                        <th>Pembuat</th>
+                        <th>Delete</th>
+                    @endif
+                    <th>Buat surat</th>
+                    <th>Download</th>
+                    
+                </tr>
+                <?php
+                    $i = (($historyNomorSurat->currentPage()-1)*20)+1
+                ?>
+                @foreach ($historyNomorSurat as $h)
+                    <tr>
+                        <td>{{$i}}</td>
+                        <td>{{date('M d, Y',strtotime($h['created_at']))}}</td>
+                        <td>{{$h['nomor_surat']}}</td>
+                        <td>{{$h['perihal']}}</td>
+                        <td>{{$h['kepada']}}</td>
+                        @if (Auth::user()->is_admin==1)
+                            <td>{{$h['name']}}</td>
+                            <td>
+                                <button class="btn btn-light" onclick="deleteNoSur({{$h}})" data-toggle="modal" data-target="#myModal">
+                                    <i class="fa fa-trash fa-5"></i>
+                                </button>
+                            </td>
+                        @endif
                         <td>
-                            <button class="btn btn-light" onclick="deleteNoSur({{$h}})" data-toggle="modal" data-target="#myModal">
+                            
+                                <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1" 
+                                    @if ($h['surat_created']==1)
+                                        disabled
+                                    @endif
+                                >
+                                    <i class="fa fa-plus fa-5"></i>
+                                </button>
+                            
+                        </td>
+                        <td>
+                            @if ($h['surat_created']==1)
+                            <form method="post" id="form" action="/download">
+                                @csrf
+                                <button type="submit" class="btn btn-light" name="id_nomor_surat" value="{{$h->id}}">
+                                    <i class="fa fa-download fa-5"></i>
+                                </button>
+                            </form>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
+                    <?php
+                        $i++;
+                    ?>
+                @endforeach
+            </table>
+            <br>
+            {{ $historyNomorSurat->links() }}
+        </div>   
+        
+        <div id="templateSurat" style="display: none;">
+
+            <form method="get" id="form" action="/history/s/">
+                <div class="row ml-1">
+                    <div class="ml-auto mr-3">
+                        <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
+                    </div>
+                </div>
+            </form>
+
+            <table class="center">
+                <tr>
+                <th>No</th>
+                    <th>Kepada</th>
+                    @if (Auth::user()->is_admin==1)
+                        <th>Pembuat</th>
+                        <th>Delete</th>
+                    @endif
+                        
+                </tr>
+                @foreach ($historyTemplateSurat as $h)
+                    <tr>
+                        <td>1</td>
+                        <td>{{$h->nama_surat}}</td>
+                        @if (Auth::user()->is_admin==1)
+                        <td>{{$h->name}}</td>
+                        <td>
+                            <button class="btn btn-light" 
+                            onclick="deleteTempSur('{{$h->id}}','{{$h->nama_surat}}')" 
+                            data-toggle="modal" data-target="#myModal">
                                 <i class="fa fa-trash fa-5"></i>
                             </button>
                         </td>
-                    @endif
-                    <td>
-                        
-                            <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1" 
-                                @if ($h['surat_created']==1)
-                                    disabled
-                                @endif
-                            >
-                                <i class="fa fa-plus fa-5"></i>
-                            </button>
-                        
-                    </td>
-                    <td>
-                        @if ($h['surat_created']==1)
-                        <form method="post" id="form" action="/download">
-                            @csrf
-                            <button type="submit" class="btn btn-light" name="id_nomor_surat" value="{{$h->id}}">
-                                <i class="fa fa-download fa-5"></i>
-                            </button>
-                        </form>
-                        @else
-                            -
                         @endif
-                    </td>
-                </tr>
-                <?php
-                    $i++;
-                ?>
-            @endforeach
-        </table>
-        <br>
-        {{ $history->links() }}
-    </div>   
+                    </tr>
+                    
+                @endforeach
+                    
+            </table>
+            <br>
+            {{ $historyTemplateSurat->links() }}
+        </div>
+    </div>
+
     
 
     <!-- Reference: https://www.w3schools.com/bootstrap4/bootstrap_modal.asp -->
@@ -125,7 +172,7 @@
                     
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
+                            <h4 class="modal-title" id="text"></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         
@@ -133,7 +180,7 @@
                             <!-- Modal body -->
                             <div class="modal-body" style="text-align: center;">
                                 <!-- <h4 id="nomor_surat" style="text-align: center;"></h4> -->
-                                <input type="text" id="nomor_surat" value="" style="text-align: center;">
+                                <input type="text" id="surat" value="" style="text-align: center;">
                             </div>
                             
                             <!-- Modal footer -->
@@ -166,7 +213,7 @@
                     
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Apakah Anda yakin ingin menghapus nomor berikut?</h4>
+                            <h4 class="modal-title">Silakan pilih template surat yang akan digunkan</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         
@@ -204,9 +251,10 @@
 <script>
     function deleteNoSur($h){
         console.log("Apakah Anda yakin ingin menghapus nomor berikut?" + $h['id'] + " " +$h['nomor_surat']);
-        document.getElementById("nomor_surat").value = $h['nomor_surat'];
+        document.getElementById("surat").value = $h['nomor_surat'];
+        $("#text").text("Apakah Anda yakin ingin menghapus nomor berikut?");
 
-        $('#formId').attr('action', "/history/delete/"+$h['id']);
+        $('#formId').attr('action', "/history/nomor-surat/"+$h['id']);
         
     }
     function buatSurat($h){
@@ -215,5 +263,26 @@
 
         $('#formId1').attr('action', "/buat-surat");    
     }
+
+    $("#btnNomorSurat").click(function(){
+        $("#nomorSurat").show();
+        $("#templateSurat").hide();
+    });
+
+    $("#btnTemplateSurat").click(function(){
+        $("#templateSurat").show();
+        $("#nomorSurat").hide();
+    });
+
+    function deleteTempSur($id, $nama){
+        console.log("Apakah Anda yakin ingin menghapus Template?" + $nama);
+        document.getElementById("surat").value = $nama;
+        $("#text").text("Apakah Anda yakin ingin menghapus template berikut?");
+
+        $('#formId').attr('action', "/history/template-surat/"+$id);
+        
+    }
+
+
 </script>
 
