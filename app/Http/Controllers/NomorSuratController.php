@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Session;
 class NomorSuratController extends Controller
 {
     private TipeSuratController $tipeSuratController;
-    private TemplateSuratController $templateSuratController;
+    // private TemplateSuratController $templateSuratController;
     private Carbon $date;
     
     public function __construct(){
         $this->tipeSuratController = new TipeSuratController();
-        $this->templateSuratController =  new TemplateSuratController();
+        // $this->templateSuratController =  new TemplateSuratController();
         $this->date = Carbon::now('utc');
     }
 
@@ -74,6 +74,7 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada','nomor_surats.surat_created', 'users.name')
+            ->where('nomor_surats.deleted_at',null)
             ->orderBy('nomor_surats.created_at', 'desc')
             ->orderBy('nomor_surats.id', 'desc');
         
@@ -83,7 +84,13 @@ class NomorSuratController extends Controller
             $history = $history->where('id_user','=', Auth::id())->paginate(20);
             
         }
-        return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat(), 'template'=>$this->templateSuratController->getTemplateSurat()]);
+        $res=[
+            $history,
+            $this->tipeSuratController->getTipeSurat(),
+            // $this->templateSuratController->getTemplateSurat()
+        ];
+        return $res;
+        // return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat(), 'template'=>$this->templateSuratController->getTemplateSurat()]);
         
     }
 
@@ -91,6 +98,7 @@ class NomorSuratController extends Controller
         $history = NomorSurat::join('users', 'nomor_surats.id_user','=','users.id')
             ->select('nomor_surats.id','nomor_surats.created_at','nomor_surats.nomor_surat'
             ,'nomor_surats.perihal','nomor_surats.kepada','nomor_surats.surat_created', 'users.name')
+            ->where('nomor_surats.deleted_at',null)
             ->orderBy('nomor_surats.created_at', 'desc')
             ->orderBy('nomor_surats.id', 'desc');
 
@@ -145,14 +153,21 @@ class NomorSuratController extends Controller
             }
         }
 
-        return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
+        $res=[
+            $history,
+            $this->tipeSuratController->getTipeSurat(),
+            // $this->templateSuratController->getTemplateSurat()
+        ];
+        return $res;
+
+        // return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
     }
 
     public function delete(Request $request){
         // print_r($request['id']);
         // return view('dashboard');
         $nosur = NomorSurat::find($request['id']);
-        $nosur->updated_at = $this->date->toDateTimeString();
+        $nosur->deleted_at = $this->date->toDateTimeString();
         $nosur->save();
 
         return redirect()->back();
