@@ -23,7 +23,8 @@ class TipeSuratSeeder extends Seeder
         for($i = 0; $i < sizeof($this->tipeSurat); $i++){
             DB::table('tipe_surats')->insert([
                 'tipe_surat' => $this->tipeSurat[$i],
-                'alias' => $this->alias[$i]
+                'alias' => $this->alias[$i],
+                'id_user' => 1,
             ]);
         }
     }

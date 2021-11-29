@@ -16,10 +16,15 @@ class TipeSurat extends Model
     protected $fillable = [
         'tipe_surat',
         'alias',
+        'id_user',
     ];
 
     // id table FK, id table ini
     public function nomorSurat(){
         return $this->hasMany(nomorSurat::class,'id_tipe_surat','id');
+    }
+
+    public function user(){
+        return $this->belongTo(User::class, 'id','id_user');
     }
 }

@@ -108,6 +108,12 @@
                                 </x-jet-dropdown-link>
                             @endif
 
+                            @if (Auth::user()->is_admin==1)
+                                <x-jet-dropdown-link href="/tipe-surat">
+                                    {{ __('Tipe Surat') }}
+                                </x-jet-dropdown-link>
+                            @endif
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}

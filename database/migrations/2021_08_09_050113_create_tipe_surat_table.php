@@ -17,6 +17,7 @@ class CreateTipeSuratTable extends Migration
             $table->id();
             $table->string('tipe_surat');
             $table->string('alias');
+            $table->foreignId('id_user')->constrained('users');
             $table->timestamps();
         });
     }

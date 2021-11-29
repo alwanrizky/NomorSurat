@@ -14,7 +14,7 @@
                 <b>Create Template</b>
             </div>
             <div class="menu">
-                <a href=""><i class="fa fa-plus-circle fa-5x"></i></a><br>
+                <a href="create-tipe-surat"><i class="fa fa-plus-circle fa-5x"></i></a><br>
                 <b>Create Tipe Surat</b>
             </div>
             <div class="menu">

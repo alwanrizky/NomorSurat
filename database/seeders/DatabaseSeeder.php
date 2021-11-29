@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-           TipeSuratSeeder::class ,
-           AdminSeeder::class
+            AdminSeeder::class,
+            TipeSuratSeeder::class
         ]);
     }
 }

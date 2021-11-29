@@ -11,18 +11,6 @@
     
 
     <div class="container center" >
-        <table class="center">
-            <tr id="row1">
-                <td id="row1">
-                    <a href="/history-nomor-surat" >Nomor Surat</a>
-                </td>
-                <td id="row1">
-                    <a href="/history-template-surat" >Template Surat</a>
-                </td>
-            </tr>
-        </table>
-        <br>
-        
         <div id="templateSurat">
 
             <form method="get" id="form" action="/history-template-surat/s/">
@@ -35,13 +23,10 @@
 
             <table class="center">
                 <tr>
-                <th>No</th>
-                    <th>Kepada</th>
-                    @if (Auth::user()->is_admin==1)
-                        <th>Pembuat</th>
-                        <th>Delete</th>
-                    @endif
-                        
+                    <th>No</th>
+                    <th>Tipe Surat</th>
+                    <th>Alias</th>
+                    <th>Delete</th>      
                 </tr>
                 <?php
                     $i = (($history->currentPage()-1)*20)+1
@@ -49,17 +34,15 @@
                 @foreach ($history as $h)
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$h->nama_surat}}</td>
-                        @if (Auth::user()->is_admin==1)
-                        <td>{{$h->name}}</td>
+                        <td>{{$h->tipe_surat}}</td>
+                        <td>{{$h->alias}}</td>
                         <td>
                             <button class="btn btn-light" 
-                            onclick="deleteTempSur('{{$h->id}}','{{$h->nama_surat}}')" 
+                            onclick="deleteTipeSurat('{{$h->id}}','{{$h->tipe_surat}}')" 
                             data-toggle="modal" data-target="#myModal">
                                 <i class="fa fa-trash fa-5"></i>
                             </button>
                         </td>
-                        @endif
                     </tr>
                     
                 @endforeach
@@ -121,13 +104,12 @@
 
 <script>
 
-    function deleteTempSur($id, $nama){
+    function deleteTipeSurat($id, $nama){
         console.log("Apakah Anda yakin ingin menghapus Template?" + $nama);
         document.getElementById("surat").value = $nama;
-        $("#text").text("Apakah Anda yakin ingin menghapus template berikut?");
+        $("#text").text("Apakah Anda yakin ingin menghapus tipe-surat-berikut berikut?");
 
-        $('#formId').attr('action', "/history-template-nomor/template-surat/"+$id);
-        
+        $('#formId').attr('action', "/tipe-surat/"+$id);
     }
 
 

@@ -17,7 +17,7 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TemplateSuratController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\TipeSuratController;
 
 Route::get('/', function () {
     return view('index');
@@ -35,12 +35,18 @@ Route::post('/generate', [NomorSuratController::class, 'generateSurat']);
 
 // Nomor Surat
 Route::get('/result-nomor-surat', [NomorSuratController::class, 'check'])->name('result-nomor-surat');
-Route::post('/history/nomor-surat/{id}', [NomorSuratController::class, 'delete'])->name('delete');
+Route::post('/history-nomor-surat/{id}', [NomorSuratController::class, 'delete'])->name('delete');
 Route::get('/create-nomor-surat',[NomorSuratController::class, 'index'])->name('create-nomor-surat');
 Route::get('/history-nomor-surat', [NomorSuratController::class, 'getHistory']);
 Route::get('/history-nomor-surat/s/', [NomorSuratController::class, 'findHistory']);
 
-
+// Tipe Surat
+Route::get('/create-tipe-surat',function(){
+    return view("create-tipe-surat");
+});
+Route::post('create-tipe-surat', [TipeSuratController::class, 'store']);
+Route::get('tipe-surat', [TipeSuratController::class, 'getHistory']);
+Route::post('tipe-surat/{id}', [TipeSuratController::class, 'delete']);
 
 // User
 Route::get('/user-control', [UserController::class, 'index']);
