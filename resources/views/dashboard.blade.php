@@ -23,7 +23,7 @@
             </div>
             @endif
             <div class="menu">
-                <a href="history"><i class="fa fa-history fa-5x"></i></a><br>
+                <a href="history-nomor-surat"><i class="fa fa-history fa-5x"></i></a><br>
                 <b>History</b>
             </div>
             

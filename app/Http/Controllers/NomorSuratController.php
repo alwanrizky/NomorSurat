@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Session;
 class NomorSuratController extends Controller
 {
     private TipeSuratController $tipeSuratController;
-    // private TemplateSuratController $templateSuratController;
+    private TemplateSuratController $templateSuratController;
     private Carbon $date;
     
     public function __construct(){
         $this->tipeSuratController = new TipeSuratController();
-        // $this->templateSuratController =  new TemplateSuratController();
+        $this->templateSuratController =  new TemplateSuratController();
         $this->date = Carbon::now('utc');
     }
 
@@ -87,10 +87,10 @@ class NomorSuratController extends Controller
         $res=[
             $history,
             $this->tipeSuratController->getTipeSurat(),
-            // $this->templateSuratController->getTemplateSurat()
+            $this->templateSuratController->getTemplateSurat()
         ];
-        return $res;
-        // return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat(), 'template'=>$this->templateSuratController->getTemplateSurat()]);
+        // return $res;
+        return view('history-nomor-surat', ['history'=>$res[0], 'tipeSurat' => $res[1], 'template'=>$res[2]]);
         
     }
 

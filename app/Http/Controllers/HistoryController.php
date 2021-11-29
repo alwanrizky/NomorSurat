@@ -15,19 +15,25 @@ class HistoryController extends Controller
         $this->templateSuratController =  new TemplateSuratController();
     }
 
-    public function getHistory(){
+    public function getHistoryNomorSurat(){
         $resNoSur = $this->nomorSuratController->getHistory();
-        $resTemp = $this->templateSuratController->getHistory();
-        return view('history', ['historyNomorSurat'=>$resNoSur[0], 
+        // $resTemp = $this->templateSuratController->getHistory();
+        return view('history-nomor-surat', ['historyNomorSurat'=>$resNoSur[0], 
         'tipeSurat' => $resNoSur[1],
-        'template'=>$this->templateSuratController->getTemplateSurat(),
-        'historyTemplateSurat'=>$resTemp]);
+        'template'=>$this->templateSuratController->getTemplateSurat()]);
+        // 'historyTemplateSurat'=>$resTemp]);
+    }
+
+    public function getHistoryTemplateSurat(){
+
+        $resTemp = $this->templateSuratController->getHistory();
+        return view('history-template-surat', ['historyTemplateSurat'=>$resTemp]);
     }
 
     public function findHistoryNomorSurat(Request $request){
         $resNoSur = $this->nomorSuratController->findHistory($request);
         // $resTemp = $this->TemplateSuratController->findHistory($request);
-        return view('history', ['historyNomorSurat'=>$resNoSur[0],
+        return view('history-nomor-surat', ['historyNomorSurat'=>$resNoSur[0],
         'tipeSurat' => $resNoSur[1],
         'template'=>$this->templateSuratController->getTemplateSurat()]);
         // 'historyTemplateSurat'=>$resTemp]);

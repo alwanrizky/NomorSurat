@@ -14,10 +14,10 @@
         <table class="center">
             <tr id="row1">
                 <td id="row1">
-                    <button id="btnNomorSurat">Nomor Surat</button>
+                    <a href="/history-nomor-surat" >Nomor Surat</a>
                 </td>
                 <td id="row1">
-                    <button id="btnTemplateSurat">Template Surat</button>
+                    <a href="/history-template-surat" >Template Surat</a>
                 </td>
             </tr>
         </table>
@@ -25,7 +25,7 @@
 
 
         <div id="nomorSurat">
-            <form method="get" id="form" action="/history/s/">
+            <form method="get" id="form" action="/history-nomor-surat/s/">
                 <div class="row ml-1">
                     <div>
                         <input id="row2" type="date" name="startDate" >
@@ -66,9 +66,9 @@
                     
                 </tr>
                 <?php
-                    $i = (($historyNomorSurat->currentPage()-1)*20)+1
+                    $i = (($history->currentPage()-1)*20)+1
                 ?>
-                @foreach ($historyNomorSurat as $h)
+                @foreach ($history as $h)
                     <tr>
                         <td>{{$i}}</td>
                         <td>{{date('M d, Y',strtotime($h['created_at']))}}</td>
@@ -113,55 +113,9 @@
                 @endforeach
             </table>
             <br>
-            {{ $historyNomorSurat->links() }}
+            {{ $history->links() }}
         </div>   
         
-        <div id="templateSurat" style="display: none;">
-
-            <form method="get" id="form" action="/history/s/">
-                <div class="row ml-1">
-                    <div class="ml-auto mr-3">
-                        <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
-                    </div>
-                </div>
-            </form>
-
-            <table class="center">
-                <tr>
-                <th>No</th>
-                    <th>Kepada</th>
-                    @if (Auth::user()->is_admin==1)
-                        <th>Pembuat</th>
-                        <th>Delete</th>
-                    @endif
-                        
-                </tr>
-                @foreach ($historyTemplateSurat as $h)
-                    <tr>
-                        <td>1</td>
-                        <td>{{$h->nama_surat}}</td>
-                        @if (Auth::user()->is_admin==1)
-                        <td>{{$h->name}}</td>
-                        <td>
-                            <button class="btn btn-light" 
-                            onclick="deleteTempSur('{{$h->id}}','{{$h->nama_surat}}')" 
-                            data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-trash fa-5"></i>
-                            </button>
-                        </td>
-                        @endif
-                    </tr>
-                    
-                @endforeach
-                    
-            </table>
-            <br>
-            {{ $historyTemplateSurat->links() }}
-        </div>
-    </div>
-
-    
-
     <!-- Reference: https://www.w3schools.com/bootstrap4/bootstrap_modal.asp -->
     <div class="container">
         <!-- The Modal -->
@@ -264,15 +218,15 @@
         $('#formId1').attr('action', "/buat-surat");    
     }
 
-    $("#btnNomorSurat").click(function(){
-        $("#nomorSurat").show();
-        $("#templateSurat").hide();
-    });
+    // $("#btnNomorSurat").click(function(){
+    //     $("#nomorSurat").show();
+    //     $("#templateSurat").hide();
+    // });
 
-    $("#btnTemplateSurat").click(function(){
-        $("#templateSurat").show();
-        $("#nomorSurat").hide();
-    });
+    // $("#btnTemplateSurat").click(function(){
+    //     $("#templateSurat").show();
+    //     $("#nomorSurat").hide();
+    // });
 
     function deleteTempSur($id, $nama){
         console.log("Apakah Anda yakin ingin menghapus Template?" + $nama);

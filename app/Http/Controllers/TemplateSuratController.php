@@ -98,7 +98,9 @@ class TemplateSuratController extends Controller
             $history = $history->where('id_user','=', Auth::id())->paginate(20);
             
         }
-        return $history;
+        // return $history;
+
+        return view('history-template-surat', ['history'=>$history]);
     }
 
     public function delete(Request $request){
