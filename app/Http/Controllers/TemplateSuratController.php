@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
 class TemplateSuratController extends Controller
 {
     private $atrSurat;
@@ -94,6 +95,31 @@ class TemplateSuratController extends Controller
     
         if(Auth::user()->is_admin==1){
             $history = $history->paginate(20);
+        }else{
+            $history = $history->where('id_user','=', Auth::id())->paginate(20);
+            
+        }
+        // return $history;
+
+        return view('history-template-surat', ['history'=>$history]);
+    }
+
+    public function findHistory(Request $request){
+        $search = $request->search;
+
+        $history = DB::table('template_surats')
+                    ->join('users', 'template_surats.id_user','=','users.id')
+                    ->where('template_surats.updated_at',null)
+                    ->select("template_surats.id", "nama_surat","name")
+                    ->orderBy('template_surats.id', 'desc');
+
+        if(Auth::user()->is_admin==1){
+            // $history = $history->paginate(20);
+            $history = $history->where(function($query) use ($search){
+                $query->where('nama_surat', 'like', '%'.$search.'%')
+                    ->orWhere('users.name', 'like', '%'.$search.'%');
+                })
+                ->paginate(20)->withQueryString();
         }else{
             $history = $history->where('id_user','=', Auth::id())->paginate(20);
             

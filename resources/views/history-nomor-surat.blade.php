@@ -11,18 +11,19 @@
     
 
     <div class="container center" >
-        <table class="center">
-            <tr id="row1">
-                <td id="row1">
-                    <a href="/history-nomor-surat" >Nomor Surat</a>
-                </td>
-                <td id="row1">
-                    <a href="/history-template-surat" >Template Surat</a>
-                </td>
-            </tr>
-        </table>
-        <br>
-
+        @if (Auth::user()->is_admin==1)
+            <table class="center">
+                <tr id="row1">
+                    <td id="row1">
+                        <a href="/history-nomor-surat" >Nomor Surat</a>
+                    </td>
+                    <td id="row1">
+                        <a href="/history-template-surat" >Template Surat</a>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        @endif
 
         <div id="nomorSurat">
             <form method="get" id="form" action="/history-nomor-surat/s/">
@@ -208,7 +209,7 @@
         document.getElementById("surat").value = $h['nomor_surat'];
         $("#text").text("Apakah Anda yakin ingin menghapus nomor berikut?");
 
-        $('#formId').attr('action', "/history/nomor-surat/"+$h['id']);
+        $('#formId').attr('action', "/history-nomor-surat/"+$h['id']);
         
     }
     function buatSurat($h){
@@ -217,26 +218,5 @@
 
         $('#formId1').attr('action', "/buat-surat");    
     }
-
-    // $("#btnNomorSurat").click(function(){
-    //     $("#nomorSurat").show();
-    //     $("#templateSurat").hide();
-    // });
-
-    // $("#btnTemplateSurat").click(function(){
-    //     $("#templateSurat").show();
-    //     $("#nomorSurat").hide();
-    // });
-
-    function deleteTempSur($id, $nama){
-        console.log("Apakah Anda yakin ingin menghapus Template?" + $nama);
-        document.getElementById("surat").value = $nama;
-        $("#text").text("Apakah Anda yakin ingin menghapus template berikut?");
-
-        $('#formId').attr('action', "/history/template-surat/"+$id);
-        
-    }
-
-
 </script>
 

@@ -38,7 +38,7 @@ Route::get('/result-nomor-surat', [NomorSuratController::class, 'check'])->name(
 Route::post('/history/nomor-surat/{id}', [NomorSuratController::class, 'delete'])->name('delete');
 Route::get('/create-nomor-surat',[NomorSuratController::class, 'index'])->name('create-nomor-surat');
 Route::get('/history-nomor-surat', [NomorSuratController::class, 'getHistory']);
-Route::get('/history-nomor-surat/s/', [HistoryController::class, 'findHistoryNomorSurat']);
+Route::get('/history-nomor-surat/s/', [NomorSuratController::class, 'findHistory']);
 
 
 
@@ -54,6 +54,7 @@ Route::get('/upload-template-surat',function(){
 Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
 Route::post('/history/template-surat/{id}', [TemplateSuratController::class, 'delete'])->name('delete');
 Route::get('/history-template-surat', [TemplateSuratController::class, 'getHistory']);
+Route::get('/history-template-surat/s/', [TemplateSuratController::class, 'findHistory']);
 
 // Surat Masuk
 Route::get('/simpan-surat',[SuratMasukController::class, 'indexSimpanSurat'])->name('simpan-surat');

@@ -25,7 +25,7 @@
         
         <div id="templateSurat">
 
-            <form method="get" id="form" action="/history/s/">
+            <form method="get" id="form" action="/history-template-surat/s/">
                 <div class="row ml-1">
                     <div class="ml-auto mr-3">
                         <input type="text" name="search" id="row2"> <button><i class="fa fa-search"></i></button> 
@@ -123,7 +123,7 @@
         document.getElementById("surat").value = $nama;
         $("#text").text("Apakah Anda yakin ingin menghapus template berikut?");
 
-        $('#formId').attr('action', "/history/template-surat/"+$id);
+        $('#formId').attr('action', "/history-template-nomor/template-surat/"+$id);
         
     }
 

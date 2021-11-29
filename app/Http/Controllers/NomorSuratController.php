@@ -156,11 +156,10 @@ class NomorSuratController extends Controller
         $res=[
             $history,
             $this->tipeSuratController->getTipeSurat(),
-            // $this->templateSuratController->getTemplateSurat()
+            $this->templateSuratController->getTemplateSurat()
         ];
-        return $res;
-
-        // return view('history', ['history'=>$history, 'tipeSurat' => $this->tipeSuratController->getTipeSurat()]);
+        // return $res;
+        return view('history-nomor-surat', ['history'=>$res[0], 'tipeSurat' => $res[1], 'template'=>$res[2]]);
     }
 
     public function delete(Request $request){
