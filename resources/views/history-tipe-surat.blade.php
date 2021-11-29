@@ -44,7 +44,9 @@
                             </button>
                         </td>
                     </tr>
-                    
+                    <?php
+                        $i++;
+                    ?>
                 @endforeach
                     
             </table>

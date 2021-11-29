@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class TipeSuratController extends Controller
 {
     public function getTipeSurat(){
-        return TipeSurat::all();
+        return TipeSurat::all()->where('updated_at',null);
     }
 
     public function getId($alias){

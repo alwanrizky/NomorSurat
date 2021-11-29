@@ -61,7 +61,9 @@
                         </td>
                         @endif
                     </tr>
-                    
+                    <?php
+                        $i++;
+                    ?>
                 @endforeach
                     
             </table>
