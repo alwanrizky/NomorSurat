@@ -126,7 +126,7 @@
         document.getElementById("surat").value = $nama;
         $("#text").text("Apakah Anda yakin ingin menghapus template berikut?");
 
-        $('#formId').attr('action', "/history-template-nomor/template-surat/"+$id);
+        $('#formId').attr('action', "/history-template-surat/"+$id);
         
     }
 

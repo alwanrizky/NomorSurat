@@ -58,7 +58,7 @@ Route::get('/upload-template-surat',function(){
     return view('upload-template-surat');
 });
 Route::post('/upload-template',[TemplateSuratController::class, 'upload']);
-Route::post('/history/template-surat/{id}', [TemplateSuratController::class, 'delete'])->name('delete');
+Route::post('/history-template-surat/{id}', [TemplateSuratController::class, 'delete'])->name('delete');
 Route::get('/history-template-surat', [TemplateSuratController::class, 'getHistory']);
 Route::get('/history-template-surat/s/', [TemplateSuratController::class, 'findHistory']);
 
