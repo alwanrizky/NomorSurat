@@ -63,7 +63,7 @@
                         <th>Delete</th>
                     @endif
                     <th>Buat surat</th>
-                    <th>Download</th>
+                    <!-- <th>Download</th> -->
                     
                 </tr>
                 <?php
@@ -85,7 +85,14 @@
                             </td>
                         @endif
                         <td>
-                            
+                            @if ($h['surat_created']==1)
+                                <form method="post" id="form" action="/download">
+                                    @csrf
+                                    <button type="submit" class="btn btn-light" name="id_nomor_surat" value="{{$h->id}}">
+                                        <i class="fa fa-download fa-5"></i>
+                                    </button>
+                                </form>
+                            @else
                                 <button class="btn btn-light" onclick="buatSurat({{$h}})" data-toggle="modal" data-target="#myModal1" 
                                     @if ($h['surat_created']==1)
                                         disabled
@@ -93,9 +100,11 @@
                                 >
                                     <i class="fa fa-plus fa-5"></i>
                                 </button>
+                            @endif
+                                
                             
                         </td>
-                        <td>
+                        <!-- <td>
                             @if ($h['surat_created']==1)
                             <form method="post" id="form" action="/download">
                                 @csrf
@@ -106,7 +115,7 @@
                             @else
                                 -
                             @endif
-                        </td>
+                        </td> -->
                     </tr>
                     <?php
                         $i++;

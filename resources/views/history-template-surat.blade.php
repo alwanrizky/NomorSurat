@@ -11,7 +11,7 @@
     
 
     <div class="container center" >
-        <table class="center">
+        <!-- <table class="center">
             <tr id="row1">
                 <td id="row1">
                     <a href="/history-nomor-surat" >Nomor Surat</a>
@@ -20,7 +20,7 @@
                     <a href="/history-template-surat" >Template Surat</a>
                 </td>
             </tr>
-        </table>
+        </table> -->
         <br>
         
         <div id="templateSurat">
