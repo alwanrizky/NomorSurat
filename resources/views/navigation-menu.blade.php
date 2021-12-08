@@ -106,11 +106,13 @@
                                 <x-jet-dropdown-link href="/user-control">
                                     {{ __('User Control') }}
                                 </x-jet-dropdown-link>
-                            @endif
-
-                            @if (Auth::user()->is_admin==1)
+                            
                                 <x-jet-dropdown-link href="/tipe-surat">
                                     {{ __('Tipe Surat') }}
+                                </x-jet-dropdown-link>
+
+                                <x-jet-dropdown-link href="/history-template-surat">
+                                    {{ __('Template Surat') }}
                                 </x-jet-dropdown-link>
                             @endif
 

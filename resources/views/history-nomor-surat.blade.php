@@ -11,7 +11,7 @@
     
 
     <div class="container center" >
-        @if (Auth::user()->is_admin==1)
+        <!-- @if (Auth::user()->is_admin==1)
             <table class="center">
                 <tr id="row1">
                     <td id="row1">
@@ -23,7 +23,7 @@
                 </tr>
             </table>
             <br>
-        @endif
+        @endif -->
 
         <div id="nomorSurat">
             <form method="get" id="form" action="/history-nomor-surat/s/">
