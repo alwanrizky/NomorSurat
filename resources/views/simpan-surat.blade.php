@@ -1,56 +1,85 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="{{URL::asset('css/create-surat.css')}}"> 
+<link rel="stylesheet" href="{{URL::asset('css/create-surat.css')}}">
 
 <x-app-layout>
-<div class="container" style="width: 60%;">
-        <?php
-            print(Session::get('message'));
-        ?>
+    <div class="container" style="width: 60%;">
+        <table>
+            <tr>
+                <td>
+                    @if (Session::get('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{Session::get('message')}}
+                    </div>
+                    @endif
 
-        <form method="post" id="form" action="/simpan-surat">
-            @csrf
-            <br>
-            <table>
-                <tr>
-                    <td>
-                        <label for="perihal">Perihal&nbsp;&nbsp;&emsp;&emsp;:&emsp;</label>
-                        <input type="text" id="perihal" name="perihal" placeholder="Perihal" required> <br>    
-                    </td>
-                </tr>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <form method="post" id="form" action="/simpan-surat">
+                            @csrf
+                            <br>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Perihal</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" id="perihal" name="perihal" placeholder="Perihal" required>
+                                    </td>
+                                </tr>
 
-                <tr>
-                    <td>
-                        <label for="kepada">Kepada&emsp;&nbsp;&emsp;:&emsp;</label>
-                        <input type="text" id="kepada" name="kepada" placeholder="Kepada" required><br>
-                    </td>
-                </tr>
+                                <tr>
+                                    <td>
+                                        Pengirim
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" id="pengirim" name="pengirim" placeholder="Pengirim" required>
+                                    </td>
+                                </tr>
 
-                <tr>
-                    <td>
-                        <label for="tipersurat">Tipe Surat&emsp;:&emsp;</label>
-                        <select id="tipesurat" name="aliasTipeSurat" required>
-                            <?php
-                                foreach($tipeSurat as $tipe){
-                                    echo "<option value='".$tipe['alias']."'>".$tipe['tipe_surat']."</option>";
-                                }
-                                
-                            ?>
-                        </select><br>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="tanggal">Tanggal&emsp;&emsp;:&emsp;</label>
-                        <input id="row2" type="date" name="date" >
-                    </td>
-                </tr>
+                                <tr>
+                                    <td>
+                                        Tipe Surat
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <select id="tipesurat" name="aliasTipeSurat" required>
+                                            <?php
+                                            foreach ($tipeSurat as $tipe) {
+                                                echo "<option value='" . $tipe['alias'] . "'>" . $tipe['tipe_surat'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Tanggal
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <input id="row2" type="date" name="date" required>
+                                    </td>
+                                </tr>
 
-            </table>
+                            </table>
 
-            <br>
-            <input type="submit" id="simpan" name="simpan" value="Simpan">
-            
-        </form>
-</div>
+                            <br>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <input type="submit" id="simpan" name="simpan" value="Simpan">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+
+    </div>
 </x-app-layout>

@@ -15,7 +15,7 @@ class CreateSuratMasukTable extends Migration
     {
         Schema::create('surat_masuks', function (Blueprint $table) {
             $table->id();
-            $table->string('kepada');
+            $table->string('pengirim');
             $table->string('perihal');
             $table->date('tanggal');
             $table->foreignId('id_user')->constrained('users');
