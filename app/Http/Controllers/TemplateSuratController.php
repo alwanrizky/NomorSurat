@@ -83,7 +83,9 @@ class TemplateSuratController extends Controller
     }
 
     public function getTemplateSurat(){
-        return DB::table('template_surats')->get();
+        return DB::table('template_surats')
+                ->where('updated_at', null)
+                ->get();
     }
 
     public function getHistory(){
