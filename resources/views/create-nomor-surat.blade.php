@@ -7,7 +7,7 @@
         <form method="post" id="form" action="/generate">
             @csrf
             <br>
-            <table>
+            <table class="table table-borderless">
                 <tr>
                     <td>
                         <label for="perihal">Perihal&nbsp;&nbsp;&emsp;&emsp;:&emsp;</label>
