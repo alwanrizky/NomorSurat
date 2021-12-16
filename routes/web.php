@@ -65,6 +65,9 @@ Route::get('/history-template-surat/s/', [TemplateSuratController::class, 'findH
 // Surat Masuk
 Route::get('/simpan-surat',[SuratMasukController::class, 'indexSimpanSurat'])->name('simpan-surat');
 Route::post('/simpan-surat',[SuratMasukController::class, 'store']);
+Route::get('/history-surat-masuk', [SuratMasukController::class, 'getHistory']);
+Route::post('/history-surat-masuk/{id}', [SuratMasukController::class, 'delete'])->name('delete');
+Route::get('/history-surat-masuk/s/', [SuratMasukController::class, 'findHistory']);
 
 // Buat Surat dari Template
 Route::post('/buat-surat',[SuratController::class, 'index']);
