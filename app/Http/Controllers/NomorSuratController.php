@@ -79,9 +79,9 @@ class NomorSuratController extends Controller
             ->orderBy('nomor_surats.id', 'desc');
         
         if(Auth::user()->is_admin==1){
-            $history = $history->paginate(20);
+            $history = $history->paginate(15);
         }else{
-            $history = $history->where('id_user','=', Auth::id())->paginate(20);
+            $history = $history->where('id_user','=', Auth::id())->paginate(15);
             
         }
         $res=[
@@ -107,7 +107,7 @@ class NomorSuratController extends Controller
         if(Auth::user()->is_admin==1){
             if($startDate!=null && $endDate!=null){
                 $history =$history->whereBetween('nomor_surats.created_at', [$startDate, $endDate])
-                ->paginate(20)->withQueryString();
+                ->paginate(15)->withQueryString();
             }else{
                 $search = $request["search"];
                 if($search){
@@ -116,13 +116,13 @@ class NomorSuratController extends Controller
                                     ->orWhere('perihal', 'like', '%'.$search.'%')
                                     ->orWhere('name','like', '%'.$search.'%');
                                 })
-                                ->paginate(20)->withQueryString();
+                                ->paginate(15)->withQueryString();
                 }else{
                     $id = $request['idTipeSurat'];
                     $history = $history->where(function($query) use ($id){
                         $query->where('id_tipe_surat', '=',$id);
                     })
-                    ->paginate(20)->withQueryString();
+                    ->paginate(15)->withQueryString();
                 }
                 
             }
@@ -130,7 +130,7 @@ class NomorSuratController extends Controller
             if($startDate!=null && $endDate!=null){
                 $history=$history->where('id_user','=', Auth::id())
                             ->whereBetween('created_at', [$startDate, $endDate])
-                            ->paginate(20)->withQueryString();;
+                            ->paginate(15)->withQueryString();;
             }else{
                 $search = $request["search"];
                 if($search){
@@ -139,14 +139,14 @@ class NomorSuratController extends Controller
                                 $query->where('kepada', 'like', '%'.$search.'%')
                                 ->orWhere('perihal', 'like', '%'.$search.'%');
                             })
-                            ->paginate(20)->withQueryString();;
+                            ->paginate(15)->withQueryString();;
                 }else{
                     $id = $request['idTipeSurat'];
                     $history = $history->where('id_user','=', Auth::id())
                             ->where(function($query) use ($id){
                                 $query->where('id_tipe_surat', '=', $id);
                             })
-                            ->paginate(20)->withQueryString();;
+                            ->paginate(15)->withQueryString();;
                             
                 }
                 
