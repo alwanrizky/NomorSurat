@@ -6,7 +6,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <x-app-layout>
-    <div class="container"  align='center' style="width:800px; margin:0 auto; background: #d6d6d6; border-radius: 10px; margin: 150px auto">
+    <div class="container" align='center' style="width:800px; margin:0 auto; background: #d6d6d6; border-radius: 10px; margin: 100px auto">
             <?php
                 $count=1;
                 $result = Session::get('result');
@@ -23,6 +23,11 @@
                 }
                 echo '</div>';
             ?>
+    </div>
+    <div class="container" align='center' >
+        <button type="button" class="btn btn-outline-secondary">
+            <a href="/history-nomor-surat">GO TO THE HISTORY</a>
+        </button>
     </div>
 </x-app-layout>
 
