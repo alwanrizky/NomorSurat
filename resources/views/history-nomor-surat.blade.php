@@ -11,19 +11,19 @@
     
 
     <div class="container center" >
-        <!-- @if (Auth::user()->is_admin==1)
+        @if (Auth::user()->is_admin==1)
             <table class="center">
                 <tr id="row1">
                     <td id="row1">
                         <a href="/history-nomor-surat" >Nomor Surat</a>
                     </td>
                     <td id="row1">
-                        <a href="/history-template-surat" >Template Surat</a>
+                        <a href="/history-surat-masuk" >Surat Masuk</a>
                     </td>
                 </tr>
             </table>
             <br>
-        @endif -->
+        @endif
 
         <div id="nomorSurat">
             <form method="get" id="form" action="/history-nomor-surat/s/">
@@ -191,6 +191,7 @@
                                 <br>
 
                                 <select id="template" name="id_template" required style="width:80%;">
+                                    <option value="">-</option>
                                     <?php
                                         foreach($template as $temp){
                                             echo "<option value='".$temp->id."'>".$temp->nama_surat."</option>";
