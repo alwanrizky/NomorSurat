@@ -27,7 +27,7 @@
 
                 </tr>
                 <tr>
-                    <td>Nomor Surat</td>
+                    <td>NOMOR SURAT</td>
                     <td style="padding: 10px;">:</td>
                     <td>
                         <input type="text" id="nomor_surat" name="nomor_surat" value="{{$nomor_surat}}" readonly>
@@ -36,7 +36,14 @@
 
                 @foreach ($atribut as $atr)
                 <tr>
-                    <td>{{$atr->key}} </td>
+                    <td>
+                        <?php
+                            $temp = explode("_",$atr->key);
+                            foreach($temp as $t){
+                                echo strtoupper($t)." ";
+                            }
+                        ?>
+                    </td>
                     <td style="padding: 10px;">:</td>
                     <td>
                         @if($atr->tipe=="textarea")
