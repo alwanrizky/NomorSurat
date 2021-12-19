@@ -26,7 +26,7 @@
     </div>
     <div class="container" align='center' >
         <button type="button" class="btn btn-outline-secondary">
-            <a href="/history-nomor-surat">GO TO THE HISTORY</a>
+            <a href="/history-nomor-surat">GO TO HISTORY</a>
         </button>
     </div>
 </x-app-layout>
