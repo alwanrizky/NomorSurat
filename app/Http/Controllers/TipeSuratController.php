@@ -44,9 +44,9 @@ class TipeSuratController extends Controller
             ->orderBy('id', 'desc');
 
         if(Auth::user()->is_admin==1){
-            $history = $history->paginate(20);
+            $history = $history->paginate(15);
         }else{
-            $history = $history->where('id_user','=', Auth::id())->paginate(20);
+            $history = $history->where('id_user','=', Auth::id())->paginate(15);
 
         }
         // return $history;

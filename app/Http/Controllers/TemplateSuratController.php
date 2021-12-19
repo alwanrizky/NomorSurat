@@ -29,7 +29,7 @@ class TemplateSuratController extends Controller
         $idTemplate = $data[0]->id;
 
         $arrArt = [];
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<50;$i++){
             $atr = "atr-".$i;
             $tipeData = "tipeData-".$i;
             if($request->$atr!=null){
@@ -96,11 +96,12 @@ class TemplateSuratController extends Controller
                     ->orderBy('template_surats.id', 'desc');
     
         if(Auth::user()->is_admin==1){
-            $history = $history->paginate(20);
-        }else{
-            $history = $history->where('id_user','=', Auth::id())->paginate(20);
-            
+            $history = $history->paginate(15);
         }
+        // else{
+        //     $history = $history->where('id_user','=', Auth::id())->paginate(15);
+            
+        // }
         // return $history;
 
         return view('history-template-surat', ['history'=>$history]);
@@ -121,11 +122,12 @@ class TemplateSuratController extends Controller
                 $query->where('nama_surat', 'like', '%'.$search.'%')
                     ->orWhere('users.name', 'like', '%'.$search.'%');
                 })
-                ->paginate(20)->withQueryString();
-        }else{
-            $history = $history->where('id_user','=', Auth::id())->paginate(20);
-            
+                ->paginate(15)->withQueryString();
         }
+        // else{
+        //     $history = $history->where('id_user','=', Auth::id())->paginate(15);
+            
+        // }
         // return $history;
 
         return view('history-template-surat', ['history'=>$history]);

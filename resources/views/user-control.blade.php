@@ -23,7 +23,7 @@
             </tr>
 
             <?php
-            $i = (($users->currentPage() - 1) * 20) + 1
+            $i = (($users->currentPage() - 1) * 15) + 1
             ?>
             @foreach ($users as $u)
             <tr>

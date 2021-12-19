@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     function index(){
-        $users = User::select('*')->paginate(20);
+        $users = User::select('*')->paginate(15);
         return view('user-control', ['users'=>$users]);
     }
 
@@ -30,7 +30,7 @@ class UserController extends Controller
 
         ]);
 
-        $users = User::select('*')->paginate(20);
+        // $users = User::select('*')->paginate(15);
         return redirect()->back();
         
     }

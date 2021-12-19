@@ -61,7 +61,7 @@
                     <th>Hapus</th>
                 </tr>
                 <?php
-                $i = (($history->currentPage() - 1) * 20) + 1
+                $i = (($history->currentPage() - 1) * 15) + 1
                 ?>
                 @foreach ($history as $h)
                 <tr>
