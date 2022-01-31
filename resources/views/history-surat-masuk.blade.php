@@ -56,6 +56,7 @@
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Pengirim</th>
+                    <th>Kepada</th>
                     <th>Perihal</th>
                     <th>Tipe Surat</th>
                     <th>Hapus</th>
@@ -68,6 +69,7 @@
                     <td>{{$i}}</td>
                     <td>{{$h['tanggal']}}</td>
                     <td>{{$h['pengirim']}}</td>
+                    <td>{{$h['kepada']}}</td>
                     <td>{{$h['perihal']}}</td>
                     <td>{{$h['alias']}}</td>
                     <td>

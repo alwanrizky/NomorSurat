@@ -42,6 +42,16 @@
 
                                 <tr>
                                     <td>
+                                        Kepada
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" id="kepada" name="kepada" placeholder="Kepada" required>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
                                         Tipe Surat
                                     </td>
                                     <td>:</td>

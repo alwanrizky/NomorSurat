@@ -13,6 +13,7 @@ class SuratMasuk extends Model
         'nomor_surat',
         'pengirim',
         'perihal',
+        'kepada',
         'tanggal',
         'id_user',
         'id_tipe_surat'

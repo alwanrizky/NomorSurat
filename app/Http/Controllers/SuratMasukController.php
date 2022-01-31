@@ -28,12 +28,14 @@ class SuratMasukController extends Controller
 
         $perihal = $request['perihal'];
         $pengirim = $request['pengirim'];
+        $kepada = $request['kepada'];
         $tanggal = $request['date'];
         $aliasTipeSurat = $request['aliasTipeSurat'];
         $idTipeSurat = $this->tipeSuratController->getId($aliasTipeSurat);
 
         DB::table('surat_masuks')->insert([
             'pengirim' => $pengirim,
+            'kepada' => $kepada,
             'perihal' => $perihal,
             'tanggal' => $tanggal,
             'id_user' => Auth::id(),
@@ -47,7 +49,7 @@ class SuratMasukController extends Controller
     public function getHistory()
     {
         $history = SuratMasuk::join('tipe_surats', 'surat_masuks.id_tipe_surat', '=', 'tipe_surats.id')
-            ->select('surat_masuks.id', 'tanggal', 'pengirim', 'perihal', 'tipe_surats.alias')
+            ->select('surat_masuks.id', 'tanggal', 'pengirim','kepada', 'perihal', 'tipe_surats.alias')
             ->where('surat_masuks.updated_at', null)
             ->orderBy('surat_masuks.created_at', 'desc')
             ->orderBy('surat_masuks.id', 'desc');
@@ -67,7 +69,7 @@ class SuratMasukController extends Controller
 
     public function findHistory(Request $request){
         $history = SuratMasuk::join('tipe_surats', 'surat_masuks.id_tipe_surat', '=', 'tipe_surats.id')
-        ->select('surat_masuks.id', 'tanggal', 'pengirim', 'perihal', 'tipe_surats.alias')
+        ->select('surat_masuks.id', 'tanggal', 'pengirim','kepada','perihal', 'tipe_surats.alias')
         ->where('surat_masuks.updated_at', null)
         ->orderBy('surat_masuks.created_at', 'desc')
         ->orderBy('surat_masuks.id', 'desc');
@@ -84,7 +86,8 @@ class SuratMasukController extends Controller
                 if($search){
                     $history = $history->where(function($query) use ($search){
                                     $query->where('pengirim', 'like', '%'.$search.'%')
-                                    ->orWhere('perihal', 'like', '%'.$search.'%');
+                                    ->orWhere('perihal', 'like', '%'.$search.'%')
+                                    ->orWhere('kepada', 'like', '%'.$search.'%');
                                 })
                                 ->paginate(15)->withQueryString();
                 }else{
@@ -107,7 +110,8 @@ class SuratMasukController extends Controller
                     $history = $history->where('id_user','=', Auth::id())
                             ->where(function($query) use ($search){
                                 $query->where('pengirim', 'like', '%'.$search.'%')
-                                ->orWhere('perihal', 'like', '%'.$search.'%');
+                                ->orWhere('perihal', 'like', '%'.$search.'%')
+                                ->orWhere('kepada', 'like', '%'.$search.'%');
                             })
                             ->paginate(15)->withQueryString();;
                 }else{

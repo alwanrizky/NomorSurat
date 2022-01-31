@@ -17,6 +17,7 @@ class CreateSuratMasukTable extends Migration
             $table->id();
             $table->string('pengirim');
             $table->string('perihal');
+            $table->string('kepada');
             $table->date('tanggal');
             $table->foreignId('id_user')->constrained('users');
             $table->foreignId('id_tipe_surat')->constrained('tipe_surats');
